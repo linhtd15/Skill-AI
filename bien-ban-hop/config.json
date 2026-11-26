@@ -1,0 +1,70 @@
+{
+  "_ghi_chu": "Cấu hình Agent biên bản họp. Sửa bằng Notepad, giữ đúng dấu ngoặc kép và dấu phẩy.",
+  "thu_muc_dau_ra": "bien-ban",
+  "co_quan_mac_dinh": "",
+  "dia_danh_mac_dinh": "",
+
+  "phien_am": {
+    "mo_hinh_whisper": "large-v3-turbo",
+    "_mo_hinh_goi_y": "large-v3-turbo (chính xác, mặc định) | medium | small (nhanh hơn, kém chính xác hơn)",
+    "ngon_ngu": "vi",
+    "thiet_bi": "cpu",
+    "kieu_tinh": "int8",
+    "tach_khi_lang_giay": 0.45,
+    "tu_vung_goi_y": "Các từ thường gặp: chốt, thống nhất, hạn chót, phụ trách, giao việc, ngân sách, triệu đồng, tuần sau, báo giá, hạn, deadline.",
+    "cau_ao_giac": [
+      "hãy subscribe cho kênh",
+      "hãy đăng ký kênh",
+      "đăng ký kênh để ủng hộ",
+      "cảm ơn các bạn đã theo dõi",
+      "cảm ơn các bạn đã xem",
+      "hẹn gặp lại các bạn trong những video tiếp theo",
+      "like và subscribe",
+      "nhấn chuông thông báo",
+      "ghiền mì gõ",
+      "subtitles by",
+      "phụ đề được thực hiện bởi",
+      "thanks for watching",
+      "la la school",
+      "không bỏ lỡ những video hấp dẫn"
+    ]
+  },
+
+  "nguoi_noi": {
+    "nguong_cosine_gop_cum": 0.55,
+    "thoi_luong_toi_thieu_giay": 0.8,
+    "vung_nhan_ten_video": [0.0, 0.80, 0.45, 1.0],
+    "_vung_nhan_ten_video": "Vùng ảnh (tỉ lệ x1,y1,x2,y2) chứa nhãn tên người nói của Google Meet/Zoom/Teams, mặc định góc dưới bên trái."
+  },
+
+  "kiem_chung": {
+    "tu_khoa_bat_buoc": [
+      "chốt", "thống nhất", "giao cho", "giao việc", "phụ trách", "chịu trách nhiệm",
+      "em sẽ", "tôi sẽ", "mình sẽ", "để em", "em nhận", "tôi nhận",
+      "trước ngày", "hạn chót", "deadline", "quyết định"
+    ],
+    "tu_tu_nhan_viec": ["em sẽ", "tôi sẽ", "mình sẽ", "anh sẽ", "chị sẽ", "để em", "để tôi", "để mình", "em nhận", "tôi nhận", "mình nhận", "em xin nhận", "em lo", "tôi lo"],
+    "sai_lech_thoi_gian_giay": 3
+  },
+
+  "ban_in": {
+    "so_trang_toi_da": 4,
+    "phong_chu": "Times New Roman",
+    "trang_cuoi_toi_thieu": 0.35
+  },
+
+  "ban_doc": {
+    "pbkdf2_vong_lap": 250000
+  },
+
+  "viec": {
+    "trang_thai": ["Chưa bắt đầu", "Đang làm", "Hoàn thành", "Tạm dừng", "Huỷ"],
+    "canh_bao_truoc_ngay": 3,
+    "nhac_truoc_ngay": 1
+  },
+
+  "email": {
+    "tieu_de": "[Giao việc] {tieu_de} – họp ngày {ngay}",
+    "ky_ten": "Thư ký cuộc họp"
+  }
+}

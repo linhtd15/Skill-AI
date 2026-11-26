@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Trình tạo Banner Sự kiện</title>
+<script src="./support.js"></script>
+<script src="/_blob/2b3994eb26413587f8a762ccbdd9f0c5"></script>
+<script src="/_blob/8562b2be389610b5a5088496c856a397"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#030712}
+a{color:#67E8F9}a:hover{color:#A5F3FC}
+.ctl{font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#E2E8F0}
+.ctl-card{background:#0B1222;border:1px solid #1E293B;border-radius:16px;padding:24px}
+.ctl-h{margin:0;font-size:17px;font-weight:700;color:#F1F5F9}
+.ctl-h3{margin:0;font-size:13px;font-weight:700;color:#CBD5E1;letter-spacing:.04em}
+.ctl-sub{margin:4px 0 0;font-size:13px;color:#94A3B8}
+.ctl-field{display:flex;flex-direction:column;gap:6px}
+.ctl-field label{font-size:12.5px;font-weight:600;color:#94A3B8;letter-spacing:.02em}
+.ctl-field input{font-family:inherit;font-size:14.5px;color:#F1F5F9;background:#060B19;border:1px solid #273449;border-radius:10px;padding:11px 12px;outline:none;min-height:44px;box-sizing:border-box;width:100%}
+.ctl-field input:focus{border-color:#06B6D4;box-shadow:0 0 0 3px rgba(6,182,212,.25)}
+.ctl-field input[type=color]{padding:4px;cursor:pointer}
+.ctl-field input[type=range]{padding:0;border:0;background:transparent;accent-color:#06B6D4;min-height:32px;box-shadow:none}
+.seg{display:inline-flex;flex-wrap:wrap;background:#060B19;border:1px solid #273449;border-radius:12px;padding:4px;gap:4px}
+.seg button{font-family:inherit;font-size:14px;font-weight:600;color:#94A3B8;background:transparent;border:0;border-radius:9px;padding:0 16px;min-height:40px;cursor:pointer}
+.seg button:hover{color:#E2E8F0}
+.seg button.on{background:#06B6D4;color:#04121A}
+.seg button:focus-visible{outline:2px solid #67E8F9;outline-offset:2px}
+.up{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;font-weight:600;color:#67E8F9;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.45);border-radius:10px;padding:0 14px;min-height:44px;cursor:pointer;box-sizing:border-box}
+.up:hover{background:rgba(6,182,212,.18)}
+.up:focus-within{outline:2px solid #67E8F9;outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.ghost{font-family:inherit;font-size:13px;font-weight:500;color:#94A3B8;background:transparent;border:1px solid #273449;border-radius:10px;padding:0 12px;min-height:44px;cursor:pointer}
+.ghost:hover{color:#E2E8F0;border-color:#475569}
+.tile{font-family:inherit;display:flex;flex-direction:column;gap:8px;padding:8px;background:#060B19;border:1.5px solid #273449;border-radius:12px;cursor:pointer;color:#CBD5E1;font-size:13px;font-weight:600;text-align:left}
+.tile:hover{border-color:#475569}
+.tile.on{border-color:#06B6D4;box-shadow:0 0 0 3px rgba(6,182,212,.22);color:#F1F5F9}
+.tile:focus-visible{outline:2px solid #67E8F9;outline-offset:2px}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #273449;cursor:pointer;padding:0}
+.sw.on{border-color:#F1F5F9;box-shadow:0 0 0 3px rgba(241,245,249,.25)}
+.sw:focus-visible{outline:2px solid #67E8F9;outline-offset:3px}
+.chk{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#E2E8F0;cursor:pointer;min-height:44px}
+.chk input{width:20px;height:20px;accent-color:#06B6D4;cursor:pointer;margin:0}
+.dl{font-family:inherit;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border:0;border-radius:12px;background:linear-gradient(90deg,#06B6D4,#10B981);color:#04121A;font-size:16px;font-weight:700;cursor:pointer}
+.dl:hover{filter:brightness(1.08)}
+.dl:disabled{opacity:.6;cursor:progress}
+.dl:focus-visible{outline:2px solid #A5F3FC;outline-offset:3px}
+</style>
+</helmet>
+
+<div style="width: 1280px; min-height: 2150px; box-sizing: border-box; padding: 40px; background: #030712; display: flex; flex-direction: column; gap: 28px;">
+
+  <!-- ===================== BANNER 1200x628 ===================== -->
+  <div ref="{{ bannerRef }}" style="{{ t.root }}">
+
+    <div style="{{ t.grid }}"></div>
+    <div style="{{ t.glow1 }}"></div>
+    <div style="{{ t.glow2 }}"></div>
+
+    <sc-if value="{{ decorMatrix }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ rain }}" as="r" hint-placeholder-count="14">
+        <div style="{{ r.style }}">{{ r.text }}</div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ decorCircuit }}" hint-placeholder-val="{{ false }}">
+      <svg aria-hidden="true" width="1200" height="628" viewBox="0 0 1200 628" style="position: absolute; left: 0; top: 0;" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="{{ a1 }}" stroke-opacity="{{ circuitOp }}" stroke-width="1.6">
+          <path d="M0 96 H120 L150 126 H262"></path>
+          <path d="M0 560 H80 L110 530 H200 L230 500 H300"></path>
+          <path d="M1200 66 H1080 L1050 96 H960"></path>
+          <path d="M1200 592 H1100 L1070 562 H990"></path>
+          <path d="M650 0 V40 L680 70 V138"></path>
+          <path d="M560 628 V584 L590 554 H664"></path>
+          <path d="M1200 300 H1172 L1150 322 V392"></path>
+          <path d="M0 330 H36 L58 352 V420"></path>
+          <path d="M880 628 V604 L904 580 H1010"></path>
+          <path d="M400 0 V18 L428 46 H520"></path>
+        </g>
+        <g fill="{{ a2 }}" fill-opacity="{{ circuitDotOp }}">
+          <circle cx="262" cy="126" r="4"></circle>
+          <circle cx="300" cy="500" r="4"></circle>
+          <circle cx="960" cy="96" r="4"></circle>
+          <circle cx="990" cy="562" r="4"></circle>
+          <circle cx="680" cy="138" r="4"></circle>
+          <circle cx="664" cy="554" r="4"></circle>
+          <circle cx="1150" cy="392" r="4"></circle>
+          <circle cx="58" cy="420" r="4"></circle>
+          <circle cx="1010" cy="580" r="4"></circle>
+          <circle cx="520" cy="46" r="4"></circle>
+        </g>
+      </svg>
+    </sc-if>
+
+    <sc-if value="{{ showLock }}" hint-placeholder-val="{{ true }}">
+      <svg aria-hidden="true" width="300" height="300" viewBox="0 0 300 300" style="position: absolute; left: 470px; top: 300px;">
+        <defs>
+          <filter id="lockGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="b"></feGaussianBlur>
+            <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+          </filter>
+        </defs>
+        <g filter="url(#lockGlow)" opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="7" stroke-linecap="round">
+          <path d="M100 135 V100 a50 50 0 0 1 100 0 V135"></path>
+          <rect x="75" y="135" width="150" height="120" rx="20"></rect>
+          <circle cx="150" cy="185" r="14"></circle>
+          <path d="M150 199 V225"></path>
+        </g>
+      </svg>
+    </sc-if>
+
+    <div style="{{ t.bottomLine }}"></div>
+
+    <!-- ========== LEFT COLUMN ========== -->
+    <div style="position: absolute; left: 56px; top: 44px; bottom: 44px; width: 640px; display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; flex-shrink: 0;">
+        <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ logo }}" alt="Logo đơn vị tổ chức" style="height: 56px; max-width: 260px; width: auto; display: block;">
+        </sc-if>
+        <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ t.logoPh }}">LOGO</div>
+        </sc-if>
+        <div style="{{ t.pill }}">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"></rect><path d="M8 11V7.5a4 4 0 0 1 8 0V11"></path></svg>
+          <span style="{{ t.pillText }}">https://</span>
+          <span style="{{ t.pillSub }}">secure</span>
+        </div>
+      </div>
+
+      <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <span style="{{ t.tagPill }}">{{ tag1 }}</span>
+          <span style="{{ t.tag2 }}">{{ tag2 }}</span>
+        </div>
+        <h1 style="{{ t.title }}">{{ titleMain }} <span style="{{ t.hi }}">{{ titleHi }}</span></h1>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="{{ t.bar1 }}"></div>
+          <div style="{{ t.bar2 }}"></div>
+          <div style="{{ t.bar3 }}"></div>
+        </div>
+        <div style="{{ t.meta }}">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconA }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+            <span>{{ time }}</span>
+          </div>
+          <div style="{{ t.sep }}"></div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconB }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+            <span>{{ place }}</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 22px; margin-top: 4px;">
+          <div style="{{ t.cta }}">
+            <span>{{ cta }}</span>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ t.ctaInk }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </div>
+          <sc-if value="{{ qrOn }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="{{ t.qrBox }}">
+                <sc-if value="{{ hasQr }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ qrSrc }}" alt="Mã QR đăng ký" style="width: 90px; height: 90px; display: block;">
+                </sc-if>
+                <sc-if value="{{ noQr }}" hint-placeholder-val="{{ true }}">
+                  <div style="width: 90px; height: 90px; box-sizing: border-box; border: 1.5px dashed #94A3B8; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #64748B; letter-spacing: 0.1em;">QR</div>
+                </sc-if>
+              </div>
+              <div style="{{ t.qrCap }}">{{ qrCaption }}</div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== RIGHT COLUMN: SPEAKERS ========== -->
+    <div style="position: absolute; left: 700px; top: 48px; width: 460px; height: 532px;">
+      <sc-for list="{{ slots }}" as="s" hint-placeholder-count="1">
+        <div style="{{ s.wrapStyle }}">
+          <svg aria-hidden="true" viewBox="0 0 200 200" style="{{ s.ringStyle }}">
+            <circle cx="100" cy="100" r="97" fill="none" stroke="{{ a1 }}" stroke-opacity="0.35" stroke-width="0.8" stroke-dasharray="1.5 4"></circle>
+            <circle cx="100" cy="100" r="89" fill="none" stroke="{{ a1 }}" stroke-opacity="0.55" stroke-width="1.4" stroke-dasharray="46 12 6 12"></circle>
+            <circle cx="100" cy="100" r="81" fill="none" stroke="{{ a2 }}" stroke-opacity="0.85" stroke-width="2.2" stroke-dasharray="70 440" stroke-linecap="round" transform="rotate(-140 100 100)"></circle>
+            <circle cx="100" cy="100" r="81" fill="none" stroke="{{ a1 }}" stroke-opacity="0.85" stroke-width="2.2" stroke-dasharray="40 470" stroke-linecap="round" transform="rotate(40 100 100)"></circle>
+            <path d="M100 1v7M100 192v7M1 100h7M192 100h7" stroke="{{ t.tick }}" stroke-opacity="0.75" stroke-width="1.4"></path>
+            <circle cx="168.6" cy="31.4" r="2.4" fill="{{ a2 }}"></circle>
+            <circle cx="31.4" cy="168.6" r="2" fill="{{ a1 }}"></circle>
+          </svg>
+          <div style="{{ s.photoStyle }}">
+            <sc-if value="{{ s.noPhoto }}" hint-placeholder-val="{{ true }}">
+              <svg aria-hidden="true" viewBox="0 0 100 100" style="position: absolute; left: 22%; top: 20%; width: 56%; height: 70%;" fill="none" stroke="{{ a1 }}" stroke-opacity="0.6" stroke-width="3"><circle cx="50" cy="34" r="18"></circle><path d="M14 98c3-22 18-34 36-34s33 12 36 34"></path></svg>
+            </sc-if>
+          </div>
+        </div>
+        <div style="{{ s.cardStyle }}">
+          <div style="{{ s.nameStyle }}">{{ s.name }}</div>
+          <div style="{{ s.roleStyle }}">{{ s.role }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <!-- ===================== END BANNER ===================== -->
+
+  <!-- ===================== CONTROL PANEL ===================== -->
+  <div class="ctl" style="display: flex; flex-direction: column; gap: 20px;">
+
+    <!-- Speakers -->
+    <section class="ctl-card" style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div>
+          <h2 class="ctl-h">Diễn giả</h2>
+          <p class="ctl-sub">Chọn số lượng — bố cục bên phải banner tự sắp xếp lại.</p>
+        </div>
+        <div class="seg" role="group" aria-label="Số lượng diễn giả">
+          <sc-for list="{{ counts }}" as="c" hint-placeholder-count="3">
+            <button type="button" class="{{ c.cls }}" aria-pressed="{{ c.pressed }}" onClick="{{ c.pick }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ editGridStyle }}">
+        <sc-for list="{{ editors }}" as="e" hint-placeholder-count="1">
+          <div style="background: #060B19; border: 1px solid #1E293B; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="{{ e.thumbStyle }}"></div>
+              <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+                <span style="font-size: 13px; font-weight: 700; color: #67E8F9; letter-spacing: 0.08em;">DIỄN GIẢ {{ e.num }}</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <label class="up">
+                    <input class="vh" type="file" accept="image/*" onChange="{{ e.onPhoto }}">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>
+                    Tải ảnh
+                  </label>
+                  <sc-if value="{{ e.hasPhoto }}" hint-placeholder-val="{{ false }}">
+                    <button type="button" class="ghost" onClick="{{ e.clearPhoto }}">Xóa ảnh</button>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+            <div class="ctl-field">
+              <label for="{{ e.nameId }}">Tên diễn giả</label>
+              <input type="text" id="{{ e.nameId }}" value="{{ e.name }}" onChange="{{ e.onName }}">
+            </div>
+            <div class="ctl-field">
+              <label for="{{ e.roleId }}">Chức vụ</label>
+              <input type="text" id="{{ e.roleId }}" value="{{ e.role }}" onChange="{{ e.onRole }}">
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Appearance + QR -->
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; align-items: start;">
+      <section class="ctl-card" style="grid-column: span 3; display: flex; flex-direction: column; gap: 22px;">
+        <div>
+          <h2 class="ctl-h">Giao diện</h2>
+          <p class="ctl-sub">Phong cách, màu sắc và hình nền của banner.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">PHONG CÁCH</h3>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;">
+            <sc-for list="{{ styleTiles }}" as="p" hint-placeholder-count="4">
+              <button type="button" class="{{ p.cls }}" aria-pressed="{{ p.pressed }}" onClick="{{ p.pick }}">
+                <span style="{{ p.preview }}"></span>
+                <span>{{ p.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">BẢNG MÀU NHẤN</h3>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+            <sc-for list="{{ palettes }}" as="pl" hint-placeholder-count="5">
+              <button type="button" class="{{ pl.cls }}" style="{{ pl.style }}" aria-label="{{ pl.label }}" aria-pressed="{{ pl.pressed }}" onClick="{{ pl.pick }}"></button>
+            </sc-for>
+            <span style="font-size: 12.5px; color: #94A3B8;">{{ paletteName }}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+            <sc-for list="{{ colorFields }}" as="cf" hint-placeholder-count="4">
+              <div class="ctl-field">
+                <label for="{{ cf.id }}">{{ cf.label }}</label>
+                <input type="color" id="{{ cf.id }}" value="{{ cf.value }}" onChange="{{ cf.onChange }}">
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">HÌNH NỀN</h3>
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div style="{{ bgThumb }}"></div>
+            <label class="up">
+              <input class="vh" type="file" accept="image/*" onChange="{{ onBg }}">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>
+              Tải ảnh nền
+            </label>
+            <sc-if value="{{ hasBg }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="ghost" onClick="{{ clearBg }}">Xóa ảnh nền</button>
+            </sc-if>
+          </div>
+          <div class="ctl-field" style="max-width: 420px;">
+            <label for="bg-overlay">Độ phủ màu nền lên ảnh: {{ overlay }}%</label>
+            <input type="range" id="bg-overlay" min="0" max="100" step="5" value="{{ overlay }}" onChange="{{ onOverlay }}">
+          </div>
+          <span style="font-size: 12.5px; color: #94A3B8;">Ảnh nền được phủ lớp màu Nền 1 → Nền 2 để chữ luôn dễ đọc. Kéo về 0% để thấy ảnh gốc.</span>
+        </div>
+      </section>
+
+      <section class="ctl-card" style="grid-column: span 2; display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <h2 class="ctl-h">Mã QR đăng ký</h2>
+          <p class="ctl-sub">Hiển thị cạnh nút CTA trên banner.</p>
+        </div>
+        <label class="chk">
+          <input type="checkbox" checked="{{ qrOn }}" onChange="{{ toggleQr }}">
+          Hiển thị mã QR trên banner
+        </label>
+        <div class="seg" role="group" aria-label="Nguồn mã QR">
+          <sc-for list="{{ qrModes }}" as="m" hint-placeholder-count="2">
+            <button type="button" class="{{ m.cls }}" aria-pressed="{{ m.pressed }}" onClick="{{ m.pick }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ qrModeLink }}" hint-placeholder-val="{{ true }}">
+          <div class="ctl-field">
+            <label for="qr-link">Link đăng ký (Google Form, landing page…)</label>
+            <input type="text" id="qr-link" placeholder="https://" value="{{ qrLink }}" onChange="{{ onQrLink }}">
+          </div>
+        </sc-if>
+        <sc-if value="{{ qrModeImage }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <label class="up">
+              <input class="vh" type="file" accept="image/*" onChange="{{ onQrImg }}">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>
+              Tải ảnh mã QR
+            </label>
+            <sc-if value="{{ hasQrImg }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="ghost" onClick="{{ clearQrImg }}">Xóa</button>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div class="ctl-field">
+          <label for="qr-cap">Chú thích cạnh mã QR</label>
+          <input type="text" id="qr-cap" value="{{ qrCaption }}" onChange="{{ onQrCap }}">
+        </div>
+        <sc-if value="{{ hasQrErr }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-size: 13px; color: #FCA5A5;">{{ qrErr }}</p>
+        </sc-if>
+        <sc-if value="{{ hasQr }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <img src="{{ qrSrc }}" alt="Xem trước mã QR" style="width: 96px; height: 96px; border-radius: 8px; background: #FFFFFF; padding: 6px; display: block;">
+            <span style="font-size: 12.5px; color: #94A3B8;">Hãy quét thử bằng điện thoại trước khi đăng banner.</span>
+          </div>
+        </sc-if>
+      </section>
+    </div>
+
+    <!-- Info + Export -->
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; align-items: start;">
+      <section class="ctl-card" style="grid-column: span 3; display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <h2 class="ctl-h">Logo &amp; thông tin sự kiện</h2>
+          <p class="ctl-sub">Mọi thay đổi cập nhật ngay lên banner.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <label class="up">
+            <input class="vh" type="file" accept="image/*" onChange="{{ onLogo }}">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>
+            Tải logo lên
+          </label>
+          <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}">
+            <button type="button" class="ghost" onClick="{{ clearLogo }}">Xóa logo</button>
+          </sc-if>
+          <span style="font-size: 12.5px; color: #94A3B8;">PNG nền trong suốt cho kết quả đẹp nhất.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px;">
+          <sc-for list="{{ fields }}" as="f" hint-placeholder-count="7">
+            <div class="ctl-field" style="{{ f.wrapStyle }}">
+              <label for="{{ f.id }}">{{ f.label }}</label>
+              <input type="text" id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.onChange }}">
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section class="ctl-card" style="grid-column: span 2; display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <h2 class="ctl-h">Xuất file</h2>
+          <p class="ctl-sub">Ảnh PNG tỉ lệ chuẩn Facebook 1200 × 628.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 12.5px; font-weight: 600; color: #94A3B8;">Độ phân giải</span>
+          <div class="seg" role="group" aria-label="Độ phân giải xuất">
+            <sc-for list="{{ scales }}" as="k" hint-placeholder-count="2">
+              <button type="button" class="{{ k.cls }}" aria-pressed="{{ k.pressed }}" onClick="{{ k.pick }}">{{ k.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" class="dl" onClick="{{ doExport }}" disabled="{{ busy }}">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"></path></svg>
+          {{ dlLabel }}
+        </button>
+        <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-size: 13px; color: #FCA5A5;">{{ err }}</p>
+        </sc-if>
+        <sc-if value="{{ hasExport }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <img src="{{ exportUrl }}" alt="Ảnh banner vừa xuất" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #273449; display: block;">
+            <p style="margin: 0; font-size: 12.5px; color: #94A3B8;">Nếu trình duyệt chặn tải tự động, nhấp chuột phải vào ảnh trên → “Lưu hình ảnh”.</p>
+          </div>
+        </sc-if>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2150}}'>
+const STYLES = {
+  matrix:  { label: 'Ma trận Cyber', decor: 'matrix',  light: false, bg1: '#060B19', bg2: '#0F172A' },
+  circuit: { label: 'Mạch Neon',     decor: 'circuit', light: false, bg1: '#030712', bg2: '#111827' },
+  minimal: { label: 'Tối giản',      decor: 'minimal', light: false, bg1: '#0B1120', bg2: '#1E293B' },
+  light:   { label: 'Sáng hiện đại', decor: 'circuit', light: true,  bg1: '#F8FAFC', bg2: '#E0F2FE' }
+};
+const PALETTES = [
+  { label: 'Cyan & Xanh ngọc',  a1: '#06B6D4', a2: '#10B981' },
+  { label: 'Xanh dương & Tím',  a1: '#3B82F6', a2: '#8B5CF6' },
+  { label: 'Hổ phách & Đỏ',     a1: '#F59E0B', a2: '#EF4444' },
+  { label: 'Hồng & Tím',        a1: '#EC4899', a2: '#A855F7' },
+  { label: 'Lục & Vàng chanh',  a1: '#22C55E', a2: '#EAB308' }
+];
+
+function hexRgb(h) {
+  let s = String(h || '#000000').replace('#', '');
+  if (s.length === 3) s = s.split('').map((c) => c + c).join('');
+  const n = parseInt(s, 16) || 0;
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+function rgba(h, a) { const c = hexRgb(h); return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+function mix(h1, h2, t) {
+  const a = hexRgb(h1), b = hexRgb(h2);
+  const c = a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('');
+}
+function lum(h) {
+  const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function onColor(h) {
+  const L = lum(h);
+  const dark = (L + 0.05) / (lum('#04121A') + 0.05);
+  const white = 1.05 / (L + 0.05);
+  return dark >= white ? '#04121A' : '#FFFFFF';
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 1,
+      speakers: [
+        { name: 'Tên diễn giả 1', role: 'Chức vụ – Đơn vị công tác', photo: '' },
+        { name: 'Tên diễn giả 2', role: 'Chức vụ – Đơn vị công tác', photo: '' },
+        { name: 'Tên diễn giả 3', role: 'Chức vụ – Đơn vị công tác', photo: '' }
+      ],
+      logo: '',
+      tag1: 'TECH SEMINAR',
+      tag2: 'CHUYÊN ĐỀ BẢO MẬT MẠNG',
+      titleMain: 'Triển khai hạ tầng mạng bảo mật với',
+      titleHi: 'SSL/TLS Certificate',
+      time: '[Điền ngày & giờ]',
+      place: '[Điền địa điểm / Zoom]',
+      cta: 'Đăng ký tham gia ngay',
+      style: 'matrix',
+      a1: '#06B6D4', a2: '#10B981',
+      bg1: '#060B19', bg2: '#0F172A',
+      bgImg: '', overlay: 70,
+      qrOn: true, qrMode: 'link', qrLink: '', qrGen: '', qrImg: '', qrErr: '',
+      qrCaption: 'Quét mã để đăng ký',
+      scale: 2, busy: false, err: '', exportUrl: ''
+    };
+    this.bannerEl = null;
+    this.bannerRef = (el) => { this.bannerEl = el; };
+    this.rain = this.makeRain();
+  }
+
+  makeRain() {
+    let seed = 7;
+    const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const xs = [612, 668, 724, 806, 862, 948, 1004, 1078, 1134, 1170, 40, 300, 470, 560];
+    return xs.map((x, i) => {
+      let t = '';
+      const len = 10 + Math.floor(rnd() * 16);
+      for (let k = 0; k < len; k++) t += rnd() > 0.5 ? '1' : '0';
+      return { x: x, top: Math.floor(rnd() * 360) - 60, op: 0.05 + rnd() * 0.1, alt: i % 3 === 0, text: t };
+    });
+  }
+
+  updSpeaker(i, patch) {
+    const sp = this.state.speakers.slice();
+    sp[i] = Object.assign({}, sp[i], patch);
+    this.setState({ speakers: sp });
+  }
+
+  readImage(e, cb) {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => cb(r.result);
+    r.readAsDataURL(f);
+    e.target.value = '';
+  }
+
+  makeQr(text) {
+    if (!text || !text.trim()) return { qrGen: '', qrErr: '' };
+    const q = window.qrcode;
+    if (!q) return { qrGen: '', qrErr: 'Không tải được thư viện tạo mã QR. Hãy tải lại trang.' };
+    try {
+      if (q.stringToBytesFuncs && q.stringToBytesFuncs['UTF-8']) q.stringToBytes = q.stringToBytesFuncs['UTF-8'];
+      const qr = q(0, 'M');
+      qr.addData(text.trim());
+      qr.make();
+      const n = qr.getModuleCount();
+      const cell = 10, m = 2;
+      const size = (n + m * 2) * cell;
+      const cv = document.createElement('canvas');
+      cv.width = size; cv.height = size;
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#0B1120';
+      for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+        if (qr.isDark(r, c)) ctx.fillRect((c + m) * cell, (r + m) * cell, cell, cell);
+      }
+      return { qrGen: cv.toDataURL('image/png'), qrErr: '' };
+    } catch (err) {
+      return { qrGen: '', qrErr: 'Không tạo được mã QR — link có thể quá dài.' };
+    }
+  }
+
+  async exportPng() {
+    if (!window.html2canvas) { this.setState({ err: 'Không tải được thư viện html2canvas. Hãy tải lại trang và thử lại.' }); return; }
+    if (!this.bannerEl) return;
+    this.setState({ busy: true, err: '' });
+    try {
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const s = this.state.scale;
+      const canvas = await window.html2canvas(this.bannerEl, {
+        scale: s, width: 1200, height: 628, backgroundColor: this.state.bg1,
+        useCORS: true, logging: false, scrollX: 0, scrollY: -window.scrollY
+      });
+      const url = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'banner-su-kien-' + (1200 * s) + 'x' + (628 * s) + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      this.setState({ busy: false, exportUrl: url });
+    } catch (err) {
+      this.setState({ busy: false, err: 'Xuất ảnh thất bại: ' + (err && err.message ? err.message : err) });
+    }
+  }
+
+  layout(n) {
+    if (n === 1) return [
+      { px: 100, py: 52, size: 260, cx: 55, cy: 350, cw: 350, nf: 24, rf: 14.5, pad: '16px 20px' }
+    ];
+    if (n === 2) return [
+      { px: 18, py: 30, size: 184, cx: 0, cy: 236, cw: 220, nf: 18, rf: 12.5, pad: '12px 14px' },
+      { px: 258, py: 196, size: 184, cx: 240, cy: 402, cw: 220, nf: 18, rf: 12.5, pad: '12px 14px' }
+    ];
+    return [
+      { px: 151, py: 6, size: 158, cx: 120, cy: 180, cw: 220, nf: 15.5, rf: 11.5, pad: '10px 12px' },
+      { px: 36, py: 264, size: 138, cx: 0, cy: 418, cw: 210, nf: 15, rf: 11, pad: '10px 12px' },
+      { px: 286, py: 264, size: 138, cx: 250, cy: 418, cw: 210, nf: 15, rf: 11, pad: '10px 12px' }
+    ];
+  }
+
+  theme() {
+    const st = this.state;
+    const S = STYLES[st.style] || STYLES.matrix;
+    const L = S.light;
+    const a1 = st.a1, a2 = st.a2;
+    const ink = L ? '#0F172A' : '#F8FAFC';
+    const sub = L ? '#334155' : '#E2E8F0';
+    const a1Text = L ? mix(a1, '#000000', 0.4) : mix(a1, '#FFFFFF', 0.45);
+    const a2Text = L ? mix(a2, '#000000', 0.4) : a2;
+    const hi = L ? mix(a1, '#000000', 0.3) : mix(a1, '#FFFFFF', 0.15);
+    const ctaMid = mix(a1, a2, 0.5);
+    const ctaInk = onColor(ctaMid);
+    const gridA = S.decor === 'minimal' ? (L ? 0.06 : 0.035) : (L ? 0.1 : 0.07);
+
+    const root = {
+      position: 'relative', width: '1200px', height: '628px', overflow: 'hidden', flexShrink: 0,
+      fontFamily: "'Be Vietnam Pro', system-ui, sans-serif", color: ink,
+      boxShadow: '0 30px 80px rgba(0,0,0,.55)', backgroundColor: st.bg1
+    };
+    if (st.bgImg) {
+      const o = st.overlay / 100;
+      root.backgroundImage = 'linear-gradient(125deg, ' + rgba(st.bg1, o) + ' 0%, ' + rgba(st.bg2, Math.max(0, o - 0.1)) + ' 100%), url("' + st.bgImg + '")';
+      root.backgroundSize = 'cover, cover';
+      root.backgroundPosition = 'center, center';
+      root.backgroundRepeat = 'no-repeat, no-repeat';
+    } else {
+      root.backgroundImage = 'linear-gradient(125deg, ' + st.bg1 + ' 0%, ' + mix(st.bg1, st.bg2, 0.45) + ' 45%, ' + st.bg2 + ' 100%)';
+    }
+
+    return {
+      S: S, L: L,
+      root: root,
+      grid: {
+        position: 'absolute', left: 0, top: 0, right: 0, bottom: 0,
+        backgroundImage: 'linear-gradient(' + rgba(a1, gridA) + ' 1px, transparent 1px), linear-gradient(90deg, ' + rgba(a1, gridA) + ' 1px, transparent 1px)',
+        backgroundSize: '36px 36px'
+      },
+      glow1: { position: 'absolute', left: '640px', top: '40px', width: '620px', height: '620px', borderRadius: '50%',
+        backgroundImage: 'radial-gradient(circle, ' + rgba(a1, L ? 0.16 : 0.2) + ' 0%, ' + rgba(a1, 0.06) + ' 40%, ' + rgba(a1, 0) + ' 70%)' },
+      glow2: { position: 'absolute', left: '-200px', top: '360px', width: '560px', height: '560px', borderRadius: '50%',
+        backgroundImage: 'radial-gradient(circle, ' + rgba(a2, L ? 0.12 : 0.14) + ' 0%, ' + rgba(a2, 0) + ' 65%)' },
+      bottomLine: { position: 'absolute', left: 0, right: 0, bottom: 0, height: '4px',
+        backgroundImage: 'linear-gradient(90deg, ' + a1 + ', ' + a2 + ' 60%, ' + rgba(a2, 0) + ')' },
+      logoPh: { height: '56px', width: '170px', boxSizing: 'border-box', border: '1.5px dashed ' + rgba(a1, 0.55), borderRadius: '12px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: 600, letterSpacing: '0.14em', color: a1Text },
+      pill: { display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px 8px 10px', borderRadius: '999px',
+        background: rgba(a1, L ? 0.1 : 0.08), border: '1px solid ' + rgba(a1, 0.35), boxShadow: '0 0 18px ' + rgba(a1, L ? 0.15 : 0.25) },
+      pillInk: a2Text,
+      pillText: { fontSize: '14px', fontWeight: 600, color: a2Text, letterSpacing: '0.02em' },
+      pillSub: { fontSize: '13px', fontWeight: 500, color: L ? '#475569' : '#94A3B8' },
+      tagPill: { fontSize: '14px', fontWeight: 700, letterSpacing: '0.16em', color: onColor(a1), background: a1, padding: '6px 12px', borderRadius: '6px' },
+      tag2: { fontSize: '14px', fontWeight: 600, letterSpacing: '0.14em', color: a1Text },
+      hi: { color: hi },
+      bar1: { width: '56px', height: '3px', borderRadius: '2px', background: a1 },
+      bar2: { width: '14px', height: '3px', borderRadius: '2px', background: a2 },
+      bar3: { width: '6px', height: '3px', borderRadius: '2px', background: a2, opacity: 0.6 },
+      meta: { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '12px 18px', fontSize: '17px', fontWeight: 500, color: sub },
+      iconA: L ? mix(a1, '#000000', 0.2) : a1,
+      iconB: L ? mix(a2, '#000000', 0.2) : a2,
+      sep: { width: '1px', height: '22px', background: L ? 'rgba(51,65,85,0.35)' : 'rgba(148,163,184,0.45)' },
+      cta: { display: 'flex', alignItems: 'center', gap: '12px', padding: '16px 26px', borderRadius: '12px',
+        backgroundImage: 'linear-gradient(90deg, ' + a1 + ', ' + a2 + ')', color: ctaInk, fontSize: '18px', fontWeight: 800,
+        letterSpacing: '0.01em', boxShadow: '0 10px 30px ' + rgba(a1, 0.35), flexShrink: 0 },
+      ctaInk: ctaInk,
+      qrBox: { background: '#FFFFFF', borderRadius: '12px', padding: '7px', boxShadow: '0 0 0 2px ' + rgba(a1, 0.6) + ', 0 0 22px ' + rgba(a1, 0.4), flexShrink: 0 },
+      qrCap: { maxWidth: '120px', fontSize: '13.5px', fontWeight: 600, lineHeight: 1.35, color: sub },
+      tick: L ? a1 : mix(a1, '#FFFFFF', 0.4),
+      ink: ink, a1Text: a1Text,
+      rainA: a1, rainB: a2
+    };
+  }
+
+  renderVals() {
+    const st = this.state;
+    const n = st.count;
+    const lay = this.layout(n);
+    const t = this.theme();
+    const L = t.L;
+
+    const len = (st.titleMain + ' ' + st.titleHi).length;
+    const qrShrink = st.qrOn ? 0 : 0;
+    const tfs = (len <= 48 ? 52 : len <= 62 ? 48 : len <= 80 ? 42 : 36) - qrShrink;
+    t.title = { margin: 0, fontSize: tfs + 'px', lineHeight: 1.16, fontWeight: 800, letterSpacing: '-0.01em', color: t.ink };
+
+    const rain = this.rain.map((r) => ({
+      text: r.text,
+      style: {
+        position: 'absolute', left: r.x + 'px', top: r.top + 'px', width: '9px',
+        fontFamily: "'Courier New', monospace", fontSize: '12px', lineHeight: '15px',
+        wordBreak: 'break-all', color: r.alt ? t.rainB : t.rainA, opacity: (r.op * (L ? 1.4 : 1)).toFixed(2)
+      }
+    }));
+
+    const slots = lay.map((Ly, i) => {
+      const sp = st.speakers[i];
+      const ring = Math.round(Ly.size * 1.42);
+      const off = Math.round((ring - Ly.size) / 2);
+      const photo = {
+        position: 'absolute', left: '0px', top: '0px', width: Ly.size + 'px', height: Ly.size + 'px',
+        boxSizing: 'border-box', borderRadius: '50%', border: '3px solid ' + st.a1, overflow: 'hidden',
+        boxShadow: '0 0 0 6px ' + rgba(st.a1, 0.14) + ', 0 0 30px ' + rgba(st.a1, L ? 0.35 : 0.55),
+        backgroundColor: L ? '#E2E8F0' : '#0E1A33'
+      };
+      if (sp.photo) {
+        photo.backgroundImage = 'url("' + sp.photo + '")';
+        photo.backgroundSize = 'cover';
+        photo.backgroundPosition = 'center 30%';
+        photo.backgroundRepeat = 'no-repeat';
+      } else {
+        photo.backgroundImage = L ? 'linear-gradient(160deg, #F1F5F9, #DBEAFE)' : 'linear-gradient(160deg, #15284A, #0A1326)';
+      }
+      return {
+        name: sp.name, role: sp.role, noPhoto: !sp.photo,
+        wrapStyle: { position: 'absolute', left: Ly.px + 'px', top: Ly.py + 'px', width: Ly.size + 'px', height: Ly.size + 'px' },
+        ringStyle: { position: 'absolute', left: -off + 'px', top: -off + 'px', width: ring + 'px', height: ring + 'px', overflow: 'visible' },
+        photoStyle: photo,
+        cardStyle: {
+          position: 'absolute', left: Ly.cx + 'px', top: Ly.cy + 'px', width: Ly.cw + 'px', boxSizing: 'border-box',
+          padding: Ly.pad, borderRadius: '14px', textAlign: 'center',
+          background: L ? 'rgba(255,255,255,0.8)' : 'rgba(15,23,42,0.66)',
+          border: '1px solid ' + (L ? rgba(st.a1, 0.35) : rgba(mix(st.a1, '#FFFFFF', 0.5), 0.25)),
+          backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+          boxShadow: L ? '0 12px 30px rgba(15,23,42,0.12)' : '0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)'
+        },
+        nameStyle: { fontSize: Ly.nf + 'px', fontWeight: 700, lineHeight: 1.25, color: t.ink },
+        roleStyle: { marginTop: '4px', fontSize: Ly.rf + 'px', fontWeight: 500, lineHeight: 1.35, color: t.a1Text }
+      };
+    });
+
+    const editors = [];
+    for (let i = 0; i < n; i++) {
+      const sp = st.speakers[i];
+      const th = { width: '64px', height: '64px', flexShrink: 0, borderRadius: '50%', boxSizing: 'border-box', border: '2px solid #06B6D4', backgroundColor: '#0E1A33' };
+      if (sp.photo) { th.backgroundImage = 'url("' + sp.photo + '")'; th.backgroundSize = 'cover'; th.backgroundPosition = 'center 30%'; }
+      editors.push({
+        num: i + 1, name: sp.name, role: sp.role, hasPhoto: !!sp.photo,
+        nameId: 'sp-name-' + i, roleId: 'sp-role-' + i, thumbStyle: th,
+        onName: (e) => this.updSpeaker(i, { name: e.target.value }),
+        onRole: (e) => this.updSpeaker(i, { role: e.target.value }),
+        onPhoto: (e) => this.readImage(e, (url) => this.updSpeaker(i, { photo: url })),
+        clearPhoto: () => this.updSpeaker(i, { photo: '' })
+      });
+    }
+
+    const seg = (on) => ({ cls: on ? 'on' : '', pressed: on ? 'true' : 'false' });
+    const counts = [1, 2, 3].map((k) => Object.assign({ label: k + ' Diễn giả', pick: () => this.setState({ count: k }) }, seg(k === n)));
+    const scales = [{ k: 1, label: '1x · 1200×628' }, { k: 2, label: '2x · 2400×1256' }]
+      .map((o) => Object.assign({ label: o.label, pick: () => this.setState({ scale: o.k }) }, seg(o.k === st.scale)));
+
+    const styleTiles = Object.keys(STYLES).map((key) => {
+      const S = STYLES[key];
+      const on = key === st.style;
+      return {
+        label: S.label, cls: on ? 'tile on' : 'tile', pressed: on ? 'true' : 'false',
+        preview: {
+          display: 'block', height: '52px', borderRadius: '8px',
+          backgroundColor: S.bg1,
+          backgroundImage: 'linear-gradient(' + rgba(st.a1, S.decor === 'minimal' ? 0.08 : 0.22) + ' 1px, transparent 1px), linear-gradient(90deg, ' + rgba(st.a1, S.decor === 'minimal' ? 0.08 : 0.22) + ' 1px, transparent 1px), linear-gradient(125deg, ' + S.bg1 + ', ' + S.bg2 + ')',
+          backgroundSize: '12px 12px, 12px 12px, cover',
+          border: '1px solid ' + (S.light ? '#CBD5E1' : '#1E293B')
+        },
+        pick: () => this.setState({ style: key, bg1: S.bg1, bg2: S.bg2 })
+      };
+    });
+
+    let paletteName = 'Màu tùy chỉnh';
+    const palettes = PALETTES.map((p) => {
+      const on = p.a1.toLowerCase() === st.a1.toLowerCase() && p.a2.toLowerCase() === st.a2.toLowerCase();
+      if (on) paletteName = p.label;
+      return {
+        label: p.label, cls: on ? 'sw on' : 'sw', pressed: on ? 'true' : 'false',
+        style: { backgroundImage: 'linear-gradient(135deg, ' + p.a1 + ' 0%, ' + p.a1 + ' 50%, ' + p.a2 + ' 50%, ' + p.a2 + ' 100%)' },
+        pick: () => this.setState({ a1: p.a1, a2: p.a2 })
+      };
+    });
+
+    const colorFields = [
+      ['a1', 'Màu nhấn 1'], ['a2', 'Màu nhấn 2'], ['bg1', 'Nền 1'], ['bg2', 'Nền 2']
+    ].map((d) => ({
+      id: 'col-' + d[0], label: d[1], value: st[d[0]],
+      onChange: (e) => { const p = {}; p[d[0]] = e.target.value; this.setState(p); }
+    }));
+
+    const bgThumb = {
+      width: '88px', height: '46px', borderRadius: '8px', border: '1px solid #273449', flexShrink: 0,
+      backgroundColor: st.bg1,
+      backgroundImage: st.bgImg ? 'url("' + st.bgImg + '")' : 'linear-gradient(125deg, ' + st.bg1 + ', ' + st.bg2 + ')',
+      backgroundSize: 'cover', backgroundPosition: 'center'
+    };
+
+    const fieldDefs = [
+      ['tag1', 'Tagline (nhãn)', 1], ['tag2', 'Tagline (chuyên đề)', 1],
+      ['titleMain', 'Tiêu đề chính', 2], ['titleHi', 'Cụm từ nhấn mạnh (màu nhấn)', 1],
+      ['cta', 'Nút CTA', 1], ['time', 'Thời gian', 1], ['place', 'Địa điểm / Zoom', 1]
+    ];
+    const fields = fieldDefs.map((d) => ({
+      id: 'ev-' + d[0], label: d[1], value: st[d[0]], wrapStyle: { gridColumn: 'span ' + d[2] },
+      onChange: (e) => { const p = {}; p[d[0]] = e.target.value; this.setState(p); }
+    }));
+
+    const qrSrc = st.qrMode === 'image' ? st.qrImg : st.qrGen;
+    const qrModes = [{ k: 'link', label: 'Tạo từ link' }, { k: 'image', label: 'Tải ảnh QR có sẵn' }]
+      .map((o) => Object.assign({ label: o.label, pick: () => this.setState({ qrMode: o.k }) }, seg(o.k === st.qrMode)));
+
+    return {
+      bannerRef: this.bannerRef,
+      t: t, a1: st.a1, a2: st.a2,
+      decorMatrix: t.S.decor === 'matrix',
+      decorCircuit: t.S.decor === 'circuit',
+      showLock: t.S.decor !== 'minimal',
+      lockOp: L ? 0.14 : 0.16,
+      circuitOp: L ? 0.4 : 0.35,
+      circuitDotOp: L ? 0.7 : 0.6,
+      rain: rain,
+      hasLogo: !!st.logo, noLogo: !st.logo, logo: st.logo,
+      tag1: st.tag1, tag2: st.tag2, titleMain: st.titleMain, titleHi: st.titleHi,
+      time: st.time, place: st.place, cta: st.cta,
+      slots: slots, counts: counts, editors: editors,
+      editGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(' + n + ', minmax(0, 1fr))', gap: '16px' },
+      fields: fields,
+      onLogo: (e) => this.readImage(e, (url) => this.setState({ logo: url })),
+      clearLogo: () => this.setState({ logo: '' }),
+      styleTiles: styleTiles, palettes: palettes, paletteName: paletteName, colorFields: colorFields,
+      bgThumb: bgThumb, hasBg: !!st.bgImg, overlay: st.overlay,
+      onBg: (e) => this.readImage(e, (url) => this.setState({ bgImg: url })),
+      clearBg: () => this.setState({ bgImg: '' }),
+      onOverlay: (e) => this.setState({ overlay: Number(e.target.value) }),
+      qrOn: st.qrOn,
+      toggleQr: (e) => this.setState({ qrOn: e.target.checked }),
+      qrModes: qrModes, qrModeLink: st.qrMode === 'link', qrModeImage: st.qrMode === 'image',
+      qrLink: st.qrLink,
+      onQrLink: (e) => { const v = e.target.value; this.setState(Object.assign({ qrLink: v }, this.makeQr(v))); },
+      onQrImg: (e) => this.readImage(e, (url) => this.setState({ qrImg: url })),
+      clearQrImg: () => this.setState({ qrImg: '' }),
+      hasQrImg: !!st.qrImg,
+      qrCaption: st.qrCaption,
+      onQrCap: (e) => this.setState({ qrCaption: e.target.value }),
+      hasQr: !!qrSrc, noQr: !qrSrc, qrSrc: qrSrc,
+      hasQrErr: !!st.qrErr && st.qrMode === 'link', qrErr: st.qrErr,
+      scales: scales,
+      doExport: () => this.exportPng(),
+      busy: st.busy,
+      dlLabel: st.busy ? 'Đang xuất ảnh…' : 'Tải xuống Banner (PNG)',
+      hasErr: !!st.err, err: st.err,
+      hasExport: !!st.exportUrl, exportUrl: st.exportUrl
+    };
+  }
+}
+</script>
+</body>
+</html>

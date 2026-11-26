@@ -1,0 +1,30 @@
+# Bản ghi: hop-mau.mp3 – 02:33 – định dạng dòng: #id [mm:ss] Người nói (cụm): lời
+
+#1 [00:06] Trần Minh Hoàng (S1): Chào mọi người, tôi là Hoàng. Hôm nay tôi chủ trì cuộc họp kế hoạch bán hàng Tết năm 2027.
+#2 [00:13] Trần Minh Hoàng (S1): Mục tiêu là chốt ngân sách quảng cáo và phân công chuẩn bị chương trình khuyến mãi.
+#3 [00:19] Trần Minh Hoàng (S1): Mời chị Lan ghi biên bản giúp anh.
+#4 [00:22] Phạm Ngọc Lan (S2): Dạ vâng, em là Lan. Em sẽ ghi biên bản cuộc họp hôm nay.
+#5 [00:27] Trần Minh Hoàng (S1): Đầu tiên, mời chị Hà báo cáo nhanh kết quả chiến dịch quý ba.
+#6 [00:32] Nguyễn Thu Hà (S3): Vâng, em là Hà bên Marketing.
+#7 [00:35] Nguyễn Thu Hà (S3): Quý ba doanh số online tăng 12%, nhưng chi phí quảng cáo trên mỗi đơn hàng cũng tăng khoảng 8%.
+#8 [00:42] Nguyễn Thu Hà (S3): Kênh hiệu quả nhất vẫn là mạng xã hội, còn video ngắn thì chưa đạt kỳ vọng.
+#9 [00:48] Trần Minh Hoàng (S1): Về ngân sách quảng cáo Tết, mời anh Đức cho ý kiến về khả năng chi.
+#10 [00:54] Lê Văn Đức (S4): Tôi là Đức, phụ trách kế toán.
+#11 [00:57] Lê Văn Đức (S4): Ngân sách tối đa công ty Duyệt được là 450 triệu đồng cho cả chiến dịch.
+#12 [01:02] Nguyễn Thu Hà (S3): Em đề xuất 500 triệu, vì giá quảng cáo dịch Tết thường tăng mạnh
+#13 [01:08] Lê Văn Đức (S4): Nếu vượt 450 triệu thì phải xin thêm phê duyệt của Tổng Giám đốc, sẽ mất khoảng 2 tuần
+#14 [01:15] Trần Minh Hoàng (S1): Vậy chúng ta chúc ngân sách quảng cáo Tết là 450 triệu đồng, không xin thêm
+#15 [01:21] Trần Minh Hoàng (S1): Tiếp theo là chương trình khuyến mãi
+#16 [01:24] Trần Minh Hoàng (S1): Hà ơi, em trình bày phương án nhé
+#17 [01:28] Nguyễn Thu Hà (S3): Bên em đề xuất giảm giá 15% cho đơn từ 1 triệu, kèm qua tặng hộp ly si
+#18 [01:34] Trần Minh Hoàng (S1): Thống nhất phương án giảm 15% cho đơn từ 1 triệu đồng
+#19 [01:39] Trần Minh Hoàng (S1): Chị Hà phụ trách hoàn thiện kế hoạch truyền thông, gửi tôi trước thứ 6 tuần sau
+#20 [01:45] Lê Văn Đức (S4): Về hộp ly si, tôi sẽ lấy báo giá của 3 nhà cung cấp trước ngày 23 tháng 11
+#21 [01:52] Phạm Ngọc Lan (S2): Em lo phần đặt im thiệp cảm ơn khách hàng
+#22 [01:55] Trần Minh Hoàng (S1): Còn việc kiểm tra tồn kho trước Tết thì hôm nay chưa có người nhận, cần hỏi lại bộ phận kho
+#23 [02:01] Phạm Ngọc Lan (S2): Em lo ngại dịp Tết các đơn vị vận chuyển thường quá tải, có thể giao hàng chậm
+#24 [02:07] Trần Minh Hoàng (S1): Đây là rủi ro lớn
+#25 [02:09] Trần Minh Hoàng (S1): Việc chọn thêm đơn vị vận chuyển dự phòng thì chưa quyết, để họp sau
+#26 [02:14] Trần Minh Hoàng (S1): Anh Đức giao cho bên kế toán lập bản theo dõi chi phí quảng cáo hàng tuần, hàng chốc ngày 4 tháng 12
+#27 [02:21] Lê Văn Đức (S4): Vâng, tôi nhận
+#28 [02:24] Trần Minh Hoàng (S1): Cảm ơn mọi người, cuộc họp kết thúc

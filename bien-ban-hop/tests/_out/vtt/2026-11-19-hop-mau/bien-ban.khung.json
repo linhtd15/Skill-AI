@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "tieu_de": "",
+    "muc_dich": "",
+    "ngay_hop": "2026-11-19",
+    "gio_bat_dau": "09:00",
+    "gio_ket_thuc": null,
+    "dia_diem": null,
+    "hinh_thuc": null,
+    "co_quan": null,
+    "so": null,
+    "dia_danh": null,
+    "chu_tri": null,
+    "thu_ky": null,
+    "so_ban": null,
+    "nguon": "hop-mau.vtt"
+  },
+  "nguoi_tham_gia": [
+    {
+      "ten": "Trần Minh Hoàng",
+      "email": "hoang.tm@example.com",
+      "vai_tro": "Giám đốc kinh doanh (chủ trì)"
+    },
+    {
+      "ten": "Nguyễn Thu Hà",
+      "email": "ha.nt@example.com",
+      "vai_tro": "Trưởng nhóm Marketing"
+    },
+    {
+      "ten": "Lê Văn Đức",
+      "email": "duc.lv@example.com",
+      "vai_tro": "Kế toán"
+    },
+    {
+      "ten": "Phạm Ngọc Lan",
+      "email": null,
+      "vai_tro": "Chăm sóc khách hàng (thư ký)"
+    }
+  ],
+  "tom_tat": [],
+  "chu_de": [],
+  "quyet_dinh": [],
+  "hanh_dong": [],
+  "van_de_mo": [],
+  "bo_qua": [],
+  "can_lam_ro": []
+}

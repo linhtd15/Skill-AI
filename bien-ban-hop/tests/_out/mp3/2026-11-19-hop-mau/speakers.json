@@ -1,0 +1,78 @@
+{
+  "S1": {
+    "ten": "Trần Minh Hoàng",
+    "do_tin": "cao",
+    "can_cu": [
+      {
+        "loai": "tu_gioi_thieu",
+        "ten": "Trần Minh Hoàng",
+        "seg": 1,
+        "trich": "tôi là Hoàng"
+      }
+    ],
+    "thoi_luong_noi": 52.7
+  },
+  "S2": {
+    "ten": "Phạm Ngọc Lan",
+    "do_tin": "cao",
+    "can_cu": [
+      {
+        "loai": "duoc_goi_ten",
+        "ten": "Phạm Ngọc Lan",
+        "seg": 3,
+        "trich": "Mời chị Lan"
+      },
+      {
+        "loai": "tu_gioi_thieu",
+        "ten": "Phạm Ngọc Lan",
+        "seg": 4,
+        "trich": "em là Lan"
+      }
+    ],
+    "thoi_luong_noi": 10.0
+  },
+  "S3": {
+    "ten": "Nguyễn Thu Hà",
+    "do_tin": "cao",
+    "can_cu": [
+      {
+        "loai": "duoc_goi_ten",
+        "ten": "Nguyễn Thu Hà",
+        "seg": 5,
+        "trich": "mời chị Hà"
+      },
+      {
+        "loai": "tu_gioi_thieu",
+        "ten": "Nguyễn Thu Hà",
+        "seg": 6,
+        "trich": "em là Hà"
+      },
+      {
+        "loai": "duoc_goi_ten",
+        "ten": "Nguyễn Thu Hà",
+        "seg": 16,
+        "trich": "Hà ơi"
+      }
+    ],
+    "thoi_luong_noi": 22.5
+  },
+  "S4": {
+    "ten": "Lê Văn Đức",
+    "do_tin": "cao",
+    "can_cu": [
+      {
+        "loai": "duoc_goi_ten",
+        "ten": "Lê Văn Đức",
+        "seg": 9,
+        "trich": "mời anh Đức"
+      },
+      {
+        "loai": "tu_gioi_thieu",
+        "ten": "Lê Văn Đức",
+        "seg": 10,
+        "trich": "Tôi là Đức"
+      }
+    ],
+    "thoi_luong_noi": 18.7
+  }
+}

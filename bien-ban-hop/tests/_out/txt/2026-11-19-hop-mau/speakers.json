@@ -1,0 +1,54 @@
+{
+  "S1": {
+    "ten": "Trần Minh Hoàng",
+    "do_tin": "cao",
+    "thoi_luong_noi": 81.0,
+    "can_cu": [
+      {
+        "loai": "nhan_transcript",
+        "ten": "Trần Minh Hoàng",
+        "seg": null,
+        "trich": "Nhãn “Trần Minh Hoàng” trong file transcript"
+      }
+    ]
+  },
+  "S2": {
+    "ten": "Phạm Ngọc Lan",
+    "do_tin": "cao",
+    "thoi_luong_noi": 14.0,
+    "can_cu": [
+      {
+        "loai": "nhan_transcript",
+        "ten": "Phạm Ngọc Lan",
+        "seg": null,
+        "trich": "Nhãn “Phạm Ngọc Lan” trong file transcript"
+      }
+    ]
+  },
+  "S3": {
+    "ten": "Nguyễn Thu Hà",
+    "do_tin": "cao",
+    "thoi_luong_noi": 27.0,
+    "can_cu": [
+      {
+        "loai": "nhan_transcript",
+        "ten": "Nguyễn Thu Hà",
+        "seg": null,
+        "trich": "Nhãn “Nguyễn Thu Hà” trong file transcript"
+      }
+    ]
+  },
+  "S4": {
+    "ten": "Lê Văn Đức",
+    "do_tin": "cao",
+    "thoi_luong_noi": 26.0,
+    "can_cu": [
+      {
+        "loai": "nhan_transcript",
+        "ten": "Lê Văn Đức",
+        "seg": null,
+        "trich": "Nhãn “Lê Văn Đức” trong file transcript"
+      }
+    ]
+  }
+}

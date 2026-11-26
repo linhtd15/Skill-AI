@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BienBanHop//VI
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:bb4cb597-b56d-4bfd-b05a-2f2531c84b42@bienbanhop
+DTSTAMP:20261124T135948Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:Hạn: Hoàn thiện kế hoạch truyền thông chương trình khuyến mãi\, gửi chủ trì.
+DESCRIPTION:Việc V1 giao trong cuộc họp "Họp kế hoạch bán hàng Tết 2027" ngày 19/11/2026.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Nhắc hạn: Hoàn thiện kế hoạch truyền thông chương trình khuyến mãi\, gửi chủ trì.
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

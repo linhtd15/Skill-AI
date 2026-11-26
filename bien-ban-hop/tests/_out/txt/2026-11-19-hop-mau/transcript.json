@@ -1,0 +1,193 @@
+{
+  "nguon": "hop-mau.txt",
+  "duong_dan": "D:\\Claude Code\\.claude\\skills\\bien-ban-hop\\tests\\du-lieu-mau\\hop-mau.txt",
+  "loai": "transcript",
+  "thoi_luong": 154.0,
+  "segments": [
+    {
+      "start": 6.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Chào mọi người, tôi là Hoàng, hôm nay tôi chủ trì cuộc họp kế hoạch bán hàng Tết năm 2027. Mục tiêu là chốt ngân sách quảng cáo và phân công chuẩn bị chương trình khuyến mãi.",
+      "end": 18.0,
+      "id": 1,
+      "speaker": "S1"
+    },
+    {
+      "start": 18.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Mời chị Lan ghi biên bản giúp anh.",
+      "end": 22.0,
+      "id": 2,
+      "speaker": "S1"
+    },
+    {
+      "start": 22.0,
+      "speaker_label": "Phạm Ngọc Lan",
+      "text": "Dạ vâng, em là Lan, em sẽ ghi biên bản cuộc họp hôm nay.",
+      "end": 27.0,
+      "id": 3,
+      "speaker": "S2"
+    },
+    {
+      "start": 27.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Đầu tiên, mời chị Hà báo cáo nhanh kết quả chiến dịch quý ba.",
+      "end": 32.0,
+      "id": 4,
+      "speaker": "S1"
+    },
+    {
+      "start": 32.0,
+      "speaker_label": "Nguyễn Thu Hà",
+      "text": "Vâng, em là Hà bên marketing. Quý ba doanh số online tăng mười hai phần trăm, nhưng chi phí quảng cáo trên mỗi đơn hàng cũng tăng khoảng tám phần trăm.",
+      "end": 42.0,
+      "id": 5,
+      "speaker": "S3"
+    },
+    {
+      "start": 42.0,
+      "speaker_label": "Nguyễn Thu Hà",
+      "text": "Kênh hiệu quả nhất vẫn là mạng xã hội, còn video ngắn thì chưa đạt kỳ vọng.",
+      "end": 48.0,
+      "id": 6,
+      "speaker": "S3"
+    },
+    {
+      "start": 48.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Về ngân sách quảng cáo Tết, mời anh Đức cho ý kiến về khả năng chi.",
+      "end": 54.0,
+      "id": 7,
+      "speaker": "S1"
+    },
+    {
+      "start": 54.0,
+      "speaker_label": "Lê Văn Đức",
+      "text": "Tôi là Đức, phụ trách kế toán. Ngân sách tối đa công ty duyệt được là bốn trăm năm mươi triệu đồng cho cả chiến dịch.",
+      "end": 63.0,
+      "id": 8,
+      "speaker": "S4"
+    },
+    {
+      "start": 63.0,
+      "speaker_label": "Nguyễn Thu Hà",
+      "text": "Em đề xuất năm trăm triệu, vì giá quảng cáo dịp Tết thường tăng mạnh.",
+      "end": 68.0,
+      "id": 9,
+      "speaker": "S3"
+    },
+    {
+      "start": 68.0,
+      "speaker_label": "Lê Văn Đức",
+      "text": "Nếu vượt bốn trăm năm mươi triệu thì phải xin thêm phê duyệt của tổng giám đốc, sẽ mất khoảng hai tuần.",
+      "end": 75.0,
+      "id": 10,
+      "speaker": "S4"
+    },
+    {
+      "start": 75.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Vậy chúng ta chốt ngân sách quảng cáo Tết là bốn trăm năm mươi triệu đồng, không xin thêm.",
+      "end": 81.0,
+      "id": 11,
+      "speaker": "S1"
+    },
+    {
+      "start": 81.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Tiếp theo là chương trình khuyến mãi. Hà ơi, em trình bày phương án nhé.",
+      "end": 88.0,
+      "id": 12,
+      "speaker": "S1"
+    },
+    {
+      "start": 88.0,
+      "speaker_label": "Nguyễn Thu Hà",
+      "text": "Bên em đề xuất giảm giá mười lăm phần trăm cho đơn từ một triệu, kèm quà tặng hộp lì xì.",
+      "end": 94.0,
+      "id": 13,
+      "speaker": "S3"
+    },
+    {
+      "start": 94.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Thống nhất phương án giảm mười lăm phần trăm cho đơn từ một triệu đồng.",
+      "end": 99.0,
+      "id": 14,
+      "speaker": "S1"
+    },
+    {
+      "start": 99.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Chị Hà phụ trách hoàn thiện kế hoạch truyền thông, gửi tôi trước thứ Sáu tuần sau.",
+      "end": 105.0,
+      "id": 15,
+      "speaker": "S1"
+    },
+    {
+      "start": 105.0,
+      "speaker_label": "Lê Văn Đức",
+      "text": "Về hộp lì xì, tôi sẽ lấy báo giá của ba nhà cung cấp trước ngày 23 tháng 11.",
+      "end": 112.0,
+      "id": 16,
+      "speaker": "S4"
+    },
+    {
+      "start": 112.0,
+      "speaker_label": "Phạm Ngọc Lan",
+      "text": "Em lo phần đặt in thiệp cảm ơn khách hàng.",
+      "end": 115.0,
+      "id": 17,
+      "speaker": "S2"
+    },
+    {
+      "start": 115.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Còn việc kiểm tra tồn kho trước Tết thì hôm nay chưa có người nhận, cần hỏi lại bộ phận kho.",
+      "end": 121.0,
+      "id": 18,
+      "speaker": "S1"
+    },
+    {
+      "start": 121.0,
+      "speaker_label": "Phạm Ngọc Lan",
+      "text": "Em lo ngại dịp Tết các đơn vị vận chuyển thường quá tải, có thể giao hàng chậm.",
+      "end": 127.0,
+      "id": 19,
+      "speaker": "S2"
+    },
+    {
+      "start": 127.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Đây là rủi ro lớn. Việc chọn thêm đơn vị vận chuyển dự phòng thì chưa quyết, để họp sau.",
+      "end": 134.0,
+      "id": 20,
+      "speaker": "S1"
+    },
+    {
+      "start": 134.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Anh Đức giao cho bên kế toán lập bảng theo dõi chi phí quảng cáo hằng tuần, hạn chót ngày 4 tháng 12.",
+      "end": 141.0,
+      "id": 21,
+      "speaker": "S1"
+    },
+    {
+      "start": 141.0,
+      "speaker_label": "Lê Văn Đức",
+      "text": "Vâng, tôi nhận.",
+      "end": 144.0,
+      "id": 22,
+      "speaker": "S4"
+    },
+    {
+      "start": 144.0,
+      "speaker_label": "Trần Minh Hoàng",
+      "text": "Cảm ơn mọi người, cuộc họp kết thúc.",
+      "end": 154.0,
+      "id": 23,
+      "speaker": "S1"
+    }
+  ],
+  "ao_giac_da_loc": []
+}

@@ -1,0 +1,16 @@
+{
+  "trang_thai": "DAT",
+  "loi": [],
+  "canh_bao": [
+    "Việc V4: chưa xác định người phụ trách (sẽ tô đỏ, cần hỏi lại)."
+  ],
+  "thong_ke": {
+    "trich_dan": 28,
+    "khop": 28,
+    "cau_tu_khoa_bo_qua": 2,
+    "quyet_dinh": 2,
+    "viec": 5,
+    "van_de_mo": 2
+  },
+  "bien_ban_sha256": "3bebe548b3f5101e19243567563c2063ebd95424132815e4909a392e5465ec3e"
+}

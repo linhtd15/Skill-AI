@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sức khỏe thư mục</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --ink:#1d1c1a; --muted:#6b6862; --line:#e4e1da;
+  --accent:#2f6fb2; --accent2:#7fa8d6; --warn:#b5651d; --danger:#b23a3a; --ok:#2e7d4f;
+  --bar-bg:#eeece6; --chip:#f0eee8;
+  --g1:#2a78d6; --g2:#eb6834; --g3:#1baf7a; --g4:#eda100; --g5:#e87ba4; --g6:#008300; --g7:#6250d6; --g0:#a3a199;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161615; --card:#201f1d; --ink:#ecebe7; --muted:#a19e97; --line:#34322e;
+    --accent:#6ea6e0; --accent2:#3f6e9e; --warn:#e0a060; --danger:#e57373; --ok:#6cc08e;
+    --bar-bg:#2b2a27; --chip:#2b2a27;
+    --g1:#3987e5; --g2:#d95926; --g3:#199e70; --g4:#c98500; --g5:#d55181; --g6:#0ca30c; --g7:#9085e9; --g0:#6d6b66;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161615; --card:#201f1d; --ink:#ecebe7; --muted:#a19e97; --line:#34322e;
+  --accent:#6ea6e0; --accent2:#3f6e9e; --warn:#e0a060; --danger:#e57373; --ok:#6cc08e;
+  --bar-bg:#2b2a27; --chip:#2b2a27;
+  --g1:#3987e5; --g2:#d95926; --g3:#199e70; --g4:#c98500; --g5:#d55181; --g6:#0ca30c; --g7:#9085e9; --g0:#6d6b66;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em;word-break:break-all}
+h2{font-size:19px;margin:0 0 4px}
+.sh{font-size:15px;margin:18px 0 6px;font-weight:600}
+.sub{color:var(--muted);margin:0 0 24px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .l{color:var(--muted);font-size:13px}
+.kpi .v{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi .n{color:var(--muted);font-size:12.5px}
+.kpi.hl .v{color:var(--ok)}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;margin-bottom:16px;min-width:0}
+.hint{color:var(--muted);font-size:13px;margin:0 0 12px}
+.tabs{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;margin-bottom:10px}
+.tabs button{border:0;background:transparent;color:var(--muted);padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+.tabs button.on{background:var(--accent);color:#fff}
+.bars{display:flex;flex-direction:column;gap:5px}
+.bar{display:grid;grid-template-columns:120px 1fr 92px;gap:8px;align-items:center;font-size:13.5px}
+.bar .k{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .t{background:var(--bar-bg);border-radius:4px;height:16px;overflow:hidden}
+.bar .f{background:var(--accent);height:100%;border-radius:4px}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.cols{display:flex;align-items:flex-end;gap:10px;height:200px;padding-top:22px;border-bottom:1px solid var(--line)}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.col .v{font-size:12px;color:var(--muted);margin-bottom:3px;white-space:nowrap}
+.stk{width:100%;max-width:64px;display:flex;flex-direction:column-reverse;gap:2px;cursor:default}
+.stk div{width:100%}
+.stk div:last-child{border-radius:4px 4px 0 0}
+.xl{display:flex;gap:10px}.xl div{flex:1;text-align:center;font-size:12.5px;color:var(--muted);padding-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12.5px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.path{word-break:break-all}
+.tw{overflow-x:auto}
+.chip{display:inline-block;background:var(--chip);border-radius:5px;padding:0 6px;font-size:12px;color:var(--muted);margin-left:4px}
+.tag{display:inline-block;border-radius:5px;padding:0 6px;font-size:11.5px;font-weight:600;margin-right:4px}
+.tag.keep{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.tag.del{background:color-mix(in srgb,var(--danger) 16%,transparent);color:var(--danger)}
+.tag.opt{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
+.tag.sys{background:var(--chip);color:var(--muted)}
+.cause{border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:8px;padding:12px 14px;margin-top:12px}
+.cause.med{border-left-color:var(--warn)} .cause.low{border-left-color:var(--danger)} .cause.keep{border-left-color:var(--g0)}
+.cause h3{margin:0 0 2px;font-size:15.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cause h3 .gb{font-variant-numeric:tabular-nums;color:var(--ok);white-space:nowrap}
+.cause p{margin:4px 0 8px;font-size:13.5px}
+.cause .lv{font-size:12px;color:var(--muted)}
+.cause td ul{margin:0;padding:0;list-style:none}
+.cause td li{word-break:break-all;padding:1px 0}
+.recs{display:flex;flex-direction:column;gap:10px}
+.rec{border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:8px;padding:12px 14px}
+.rec.med{border-left-color:var(--warn)} .rec.opt{border-left-color:var(--accent2)} .rec.sec{border-left-color:var(--danger)}
+.rec h3{margin:0 0 4px;font-size:15.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rec h3 .gb{font-variant-numeric:tabular-nums;color:var(--ok);white-space:nowrap}
+.rec p{margin:4px 0;font-size:13.5px}
+.rec .lv{font-size:12px;color:var(--muted)}
+code{background:var(--chip);border-radius:4px;padding:0 4px;font-size:12.5px;word-break:break-all}
+.total{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.total b{font-size:22px;color:var(--ok)}
+.stack{display:flex;gap:2px;height:22px;border-radius:6px;overflow:hidden;background:var(--bar-bg);margin:10px 0 6px}
+.stack div{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.foot{color:var(--muted);font-size:12.5px;margin-top:24px}
+.more{background:none;border:1px solid var(--line);color:var(--accent);border-radius:6px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer;margin-top:8px}
+.typewrap{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:center}
+@media (max-width:640px){.typewrap{grid-template-columns:1fr}.donutbox{max-width:220px;margin:0 auto}}
+.donutbox svg{width:100%;height:auto;display:block}
+.donutbox path{stroke:var(--card);stroke-width:2;transition:opacity .15s}
+.donutbox svg:hover path{opacity:.45}.donutbox svg path:hover{opacity:1}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px;vertical-align:-1px}
+#tip{position:fixed;pointer-events:none;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:9;max-width:340px;display:none;line-height:1.45}
+#tip b{font-weight:600}
+#tip .r{display:flex;gap:12px;justify-content:space-between}
+#tip .r span:last-child{font-variant-numeric:tabular-nums;color:var(--muted)}
+.top10{border:1.5px solid color-mix(in srgb,var(--warn) 55%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--warn) 7%,var(--card)),var(--card) 140px)}
+.topstats{display:flex;flex-wrap:wrap;gap:8px 28px;margin:2px 0 14px}
+.topstats div{font-size:13px;color:var(--muted)}
+.topstats b{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+.tr{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.tr .rk{font-size:20px;font-weight:700;color:var(--muted);text-align:center;line-height:1.2;font-variant-numeric:tabular-nums}
+.tr:nth-child(-n+3) .rk{color:var(--warn)}
+.tr .hd{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.tr .fn{font-weight:600;word-break:break-all}
+.tr .sz{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.tr .dir{font-size:12.5px;color:var(--muted);word-break:break-all}
+.tr .t{background:var(--bar-bg);border-radius:4px;height:12px;margin:5px 0 4px;overflow:hidden}
+.tr .t div{height:100%;border-radius:4px}
+.tr .meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.badge{border-radius:5px;padding:0 6px;font-size:11.5px;font-weight:600}
+.badge.d{background:color-mix(in srgb,var(--danger) 15%,transparent);color:var(--danger)}
+.badge.a{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
+.badge.x{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.ro{display:inline-block;background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok);border-radius:5px;padding:0 7px;font-size:12px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="h1">Khám sức khỏe thư mục</h1>
+  <p class="sub" id="sub"></p>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="card">
+    <h2>Dung lượng có thể giải phóng</h2>
+    <p class="hint">Ước tính đã loại trừ phần trùng giữa các nhóm (mỗi file chỉ tính một lần).</p>
+    <div class="stack" id="stack"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section class="card">
+    <h2>Dung lượng theo loại file</h2>
+    <p class="hint">Gộp theo nhóm công dụng; rê chuột lên biểu đồ để xem chi tiết.</p>
+    <div class="typewrap">
+      <div class="donutbox"><svg id="donut" viewBox="0 0 220 220" role="img" aria-label="Biểu đồ vòng dung lượng theo nhóm loại file"></svg></div>
+      <div class="tw"><table id="typeTable"></table></div>
+    </div>
+    <h3 class="sh">Chi tiết theo đuôi file</h3>
+    <div class="tabs" data-for="ext"><button class="on" data-m="s">Dung lượng</button><button data-m="n">Số file</button></div>
+    <div class="bars" id="ext"></div>
+  </section>
+
+  <section class="card">
+    <h2>Dung lượng theo năm chỉnh sửa</h2>
+    <p class="hint">Mỗi cột chia theo nhóm loại file. Rê chuột lên cột để xem phân rã.</p>
+    <div class="tabs" data-for="year"><button class="on" data-m="s">Dung lượng</button><button data-m="n">Số file</button></div>
+    <div class="legend" id="yearLegend" style="margin-bottom:6px"></div>
+    <div id="year"></div>
+    <p class="hint" id="yearNote" style="margin-top:10px"></p>
+  </section>
+
+  <section class="card">
+    <h2>Theo thư mục cấp 1</h2>
+    <p class="hint">Các file nằm trực tiếp trong thư mục gốc được gộp vào “(gốc)”.</p>
+    <div class="bars" id="dirs"></div>
+  </section>
+
+  <section class="card top10">
+    <h2>10 file nặng nhất</h2>
+    <p class="hint">Xếp theo dung lượng; thanh màu tỷ lệ với file lớn nhất và tô theo nhóm loại file.</p>
+    <div class="topstats" id="topStats"></div>
+    <div id="top"></div>
+  </section>
+
+  <section class="card">
+    <h2>Nhóm file trùng nội dung</h2>
+    <p class="hint" id="dupHint"></p>
+    <div class="tw"><table id="causeSum"></table></div>
+    <div id="causes"></div>
+  </section>
+
+  <section class="card">
+    <h2>Đề xuất dọn dẹp</h2>
+    <p class="hint">Xếp theo mức an toàn. Báo cáo này không xóa hay thay đổi file nào; hãy tự thực hiện sau khi kiểm tra, ưu tiên chuyển vào Thùng rác.</p>
+    <div class="recs" id="recs"></div>
+    <div class="total" id="total"></div>
+  </section>
+
+  <section class="card">
+    <h2>Thư mục rỗng và file 0 byte</h2>
+    <p class="hint" id="emptyHint"></p>
+    <div class="tw"><table id="empty"></table></div>
+  </section>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script id="data" type="application/json">/*DATA*/</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const F = D.files || [];
+const MB = 1024*1024, GB = MB*1024;
+const fmt = b => b>=GB ? (b/GB).toFixed(2).replace('.',',')+' GB' : b>=MB ? (b/MB).toFixed(1).replace('.',',')+' MB' : b>=1024 ? Math.round(b/1024)+' KB' : b+' B';
+const num = n => n.toLocaleString('vi-VN');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sum = a => a.reduce((x,f)=>x+f.s,0);
+const pct = (a,b) => b ? (a/b*100).toFixed(1).replace('.',',') + '%' : '0%';
+const total = sum(F);
+const base = p => p.split('\\').pop();
+const segs = p => p.split('\\');
+
+/* ---------- file classifiers ---------- */
+const isSys = f => /^(desktop\.ini|thumbs\.db|\.ds_store|ehthumbs\.db)$/i.test(base(f.p));
+const CACHE_DIR = /^(cache|caches|media cache|media cache files|peak files|.*audio previews|.*video previews|temp|tmp|__pycache__|\.cache)$/i;
+const isCache = f => /^(cfa|pek|tmp)$/.test(f.e) || segs(f.p).slice(0,-1).some(s => CACHE_DIR.test(s) || /\.PRV$/i.test(s));
+const isTemp = f => /^~\$/.test(base(f.p)) || /^(tmp|temp|crdownload|part)$/.test(f.e);
+const isAuto = p => /auto-?save|autosave|(^|\\)backup( files)?\\|\.bak$/i.test(p);
+const projIdx = p => segs(p).findIndex(s => /\.(tscproj|cmproj)$/i.test(s));
+const projOf = p => { const i = projIdx(p); return i < 0 ? null : segs(p).slice(0, i+1).join('\\'); };
+const nestedAt = p => { const s = segs(p); for (let i=1;i<s.length-1;i++) if (s[i].toLowerCase() === s[i-1].toLowerCase()) return s.slice(0,i+1).join('\\'); return null; };
+const VIDEO = /^(mp4|mov|mkv|avi|wmv|webm|m4v|flv)$/;
+
+/* ---------- type groups (fixed categorical order; colour follows the group) ---------- */
+const GROUPS = [
+  {k:'video', name:'Video',        ext:'.mp4, .mov, .mkv…', c:'var(--g1)', test:f => VIDEO.test(f.e)},
+  {k:'rec',   name:'Bản ghi màn hình', ext:'.trec, .cmrec',  c:'var(--g2)', test:f => /^(trec|cmrec)$/.test(f.e)},
+  {k:'log',   name:'Log',          ext:'.log',               c:'var(--g3)', test:f => f.e === 'log'},
+  {k:'cache', name:'Cache / tạm',  ext:'.cfa, .pek, .tmp…',  c:'var(--g4)', test:f => isCache(f) || isTemp(f)},
+  {k:'audio', name:'Âm thanh',     ext:'.mp3, .m4a, .wav…',  c:'var(--g5)', test:f => /^(mp3|m4a|wav|aac|flac|ogg|wma)$/.test(f.e)},
+  {k:'img',   name:'Ảnh',          ext:'.jpg, .png, .psd…',  c:'var(--g6)', test:f => /^(jpg|jpeg|png|gif|bmp|heic|webp|tif|tiff|psd|ai|svg|raw|cr2|nef)$/.test(f.e)},
+  {k:'doc',   name:'Tài liệu',     ext:'.docx, .pdf, .xlsx…', c:'var(--g7)', test:f => /^(doc|docx|pdf|xls|xlsx|csv|ppt|pptx|txt|md|odt|ods|odp|rtf|vsdx|vsd|mmap)$/.test(f.e)},
+  {k:'other', name:'Khác',         ext:'dự án, mã, cấu hình…', c:'var(--g0)', test:() => true},
+];
+const grpCache = new Map();
+const grpOf = f => { if (!grpCache.has(f.p)) grpCache.set(f.p, GROUPS.find(g => g.test(f))); return grpCache.get(f.p); };
+GROUPS.forEach(g => { g.files = F.filter(f => grpOf(f) === g); g.s = sum(g.files); g.n = g.files.length; });
+const GV = GROUPS.filter(g => g.n);
+
+/* ---------- duplicate groups & causes ---------- */
+const CAUSES = {
+  outside: {cls:'',     title:'Bản sao nằm ngoài thư mục dự án', lv:'An toàn cao · giữ bản trong dự án',
+    body:'Một bản nằm trong thư mục dự án (<code>*.tscproj</code>/<code>*.cmproj</code>), bản kia nằm rời bên ngoài — thường do phần mềm ghi file ra thư mục chung rồi chép vào dự án, hoặc file được xuất ra rồi đưa lại vào dự án (có thể đã đổi tên). Bản ngoài dự án không được dự án nào dùng.'},
+  nested:  {cls:'',     title:'Thư mục bị lồng trùng tên', lv:'An toàn cao · kiểm tra dự án mở đúng thư mục ngoài',
+    body:'Có thư mục chứa một thư mục con cùng tên ({N}), bên trong là bản sao media — thường do “Save As” hoặc chép dự án nhầm vào chính nó. Giữ bản ở cấp ngoài, bỏ bản trong thư mục lồng.'},
+  other:   {cls:'med',  title:'Bản sao rải rác', lv:'Kiểm tra trước · xem bản nào đang được dùng',
+    body:'Cùng nội dung nhưng nằm ở các thư mục không liên quan (tải về nhiều lần, chép tay để dự phòng…). Đề xuất giữ bản ở đường dẫn ngắn nhất; hãy xác nhận không có chương trình nào trỏ tới bản bị bỏ.'},
+  multi:   {cls:'low',  title:'Cùng tài nguyên dùng trong nhiều dự án', lv:'Rủi ro · xóa sẽ làm dự án báo thiếu media',
+    body:'Mỗi dự án giữ bản riêng của nhạc nền, logo, intro… Chỉ dọn khi các dự án đã xuất xong và không sửa lại; khi đó nên lưu trữ cả dự án ra ổ ngoài thay vì xóa lẻ từng file.'},
+  cache:   {cls:'',     title:'File cache trùng nhau', lv:'An toàn · ứng dụng tự tạo lại',
+    body:'Ứng dụng tạo một file cache cho mỗi clip/đối tượng nên nội dung có thể trùng. Không cần chọn bản giữ — xóa cả cache (xem Đề xuất dọn dẹp) là xử lý xong nhóm này.'},
+  autosave:{cls:'keep', title:'Bản tự lưu / sao lưu', lv:'Nên giữ · thường rất nhỏ',
+    body:'Bản tự lưu (Auto-Save/Backup) trùng với file chính vì bạn đã lưu lại sau lần tự lưu cuối. Đây là bản dự phòng khi file chính hỏng.'},
+  sys:     {cls:'keep', title:'File hệ thống Windows', lv:'Giữ nguyên',
+    body:'<code>desktop.ini</code>, <code>Thumbs.db</code>… giống nhau ở nhiều thư mục là bình thường; Windows dùng chúng để hiển thị thư mục.'},
+};
+const CAUSE_ORDER = ['outside','nested','other','multi','cache','autosave','sys'];
+const byHash = {};
+F.forEach(f => { if (f.h) (byHash[f.h] ||= []).push(f); });
+const groups = Object.values(byHash).filter(g => g.length > 1).map(g => {
+  const depth = f => segs(f.p).length;
+  const rank = f => (isAuto(f.p)?4:0) + (nestedAt(f.p)?2:0) + (projOf(f.p)?0:1);
+  const sorted = [...g].sort((a,b) => rank(a)-rank(b) || depth(a)-depth(b) || a.p.length-b.p.length);
+  const tops = new Set(g.map(f => projOf(f.p)).filter(Boolean).map(p => { const n = nestedAt(p); return n ? n.split('\\').slice(0,-1).join('\\') : p; }));
+  let cause;
+  if (g.every(isSys)) cause = 'sys';
+  else if (g.every(isCache)) cause = 'cache';
+  else if (g.some(f => isAuto(f.p))) cause = 'autosave';
+  else if (tops.size >= 2) cause = 'multi';
+  else if (g.some(f => nestedAt(f.p))) cause = 'nested';
+  else if (g.some(f => projOf(f.p)) && g.some(f => !projOf(f.p))) cause = 'outside';
+  else cause = 'other';
+  return {files: sorted, keep: sorted[0], extra: sorted.slice(1), size: g[0].s, waste: g[0].s*(g.length-1), cause};
+}).sort((a,b) => b.waste-a.waste);
+groups.forEach((g,i) => g.id = i+1);
+const dupWasteAll = groups.reduce((x,g)=>x+g.waste,0);
+const dupOf = new Map(); groups.forEach(g => g.files.forEach(f => dupOf.set(f.p, g)));
+
+/* ---------- cleanup categories (each file counted once, in this order) ---------- */
+const cats = [], claimed = new Set();
+function addCat(o){ const fs = o.files.filter(f => !claimed.has(f.p)); fs.forEach(f=>claimed.add(f.p)); o.files = fs; o.size = sum(fs); o.count = fs.length; if (o.count) cats.push(o); }
+const isSslLog = f => /ssl.?key|keylog/i.test(base(f.p)) && /^(log|txt)$/.test(f.e);
+addCat({key:'seclog', cls:'sec', color:'var(--danger)', title:'Xóa file log khóa TLS',
+  files: F.filter(isSslLog), lv:'An toàn · nên làm (bảo mật)',
+  body: () => `${cats_list('seclog')} chứa khóa giải mã lưu lượng HTTPS đã ghi (biến <code>SSLKEYLOGFILE</code>) — vừa tốn chỗ vừa là rủi ro bảo mật. ${D.env && D.env.sslkeylog ? '<b>Biến SSLKEYLOGFILE vẫn đang được đặt</b>: file sẽ còn phình tiếp — hãy gỡ biến môi trường này nếu không còn cần.' : 'Biến SSLKEYLOGFILE hiện không còn được đặt nên file sẽ không lớn thêm.'} Nếu không còn phân tích gói tin cũ thì xóa hẳn.`});
+addCat({key:'log', cls:'med', color:'var(--g3)', title:'Dọn file log lớn (≥ 100 MB)',
+  files: F.filter(f => f.e === 'log' && f.s >= 100*MB), lv:'Kiểm tra trước · đóng ứng dụng đang ghi log',
+  body: () => `${cats_list('log')}. Log cũ hiếm khi cần đọc lại; có thể nén (.zip) nếu muốn giữ.`});
+addCat({key:'cache', cls:'', color:'var(--ok)', title:'Xóa cache ứng dụng',
+  files: F.filter(isCache), lv:'An toàn · ứng dụng tự tạo lại khi cần',
+  body: () => `Nằm trong ${topDirs(cats.find(c=>c.key==='cache'))}. Với Premiere: <i>Edit › Preferences › Media Cache › Delete…</i> hoặc xóa thư mục <code>*.PRV</code> khi Premiere đang đóng; nên chuyển vị trí cache ra ngoài thư mục tài liệu.`});
+addCat({key:'temp', cls:'', color:'color-mix(in srgb,var(--ok) 55%,var(--bar-bg))', title:'Xóa file tạm',
+  files: F.filter(isTemp), lv:'An toàn · khi chương trình tương ứng đã đóng',
+  body: () => `File khóa Office (<code>~$…</code>), file tải dở, <code>.tmp</code>. Ví dụ: ${cats.find(c=>c.key==='temp').files.slice(0,4).map(f=>`<code>${esc(f.p)}</code>`).join(', ')}.`});
+addCat({key:'dup', cls:'med', color:'var(--warn)', title:'Bỏ bản sao trùng nội dung (giữ 1 bản/nhóm)',
+  files: groups.filter(g => ['outside','nested','other'].includes(g.cause)).flatMap(g => g.extra), lv:'Kiểm tra trước · xem chi tiết từng nhóm ở mục “Nhóm file trùng nội dung”',
+  body: () => `Gồm các nhóm “bản sao ngoài dự án”, “thư mục lồng” và “bản sao rải rác”. Không tính nhóm dùng chung giữa nhiều dự án, bản tự lưu và file hệ thống.`});
+addCat({key:'trec', cls:'opt', color:'var(--accent2)', title:'Lưu trữ bản ghi màn hình gốc ra ổ ngoài/cloud',
+  files: F.filter(f => /^(trec|cmrec)$/.test(f.e)), lv:'Tùy chọn · không xóa, chỉ di chuyển',
+  body: () => `Bản ghi thô của các dự án đã xuất video. Nếu không định chỉnh sửa lại, chuyển sang ổ ngoài hoặc cloud (chế độ chỉ-online). Con số là phần còn lại sau khi đã bỏ bản trùng.`});
+addCat({key:'exp', cls:'opt', color:'color-mix(in srgb,var(--accent2) 55%,var(--bar-bg))', title:'Lưu trữ video lớn (≥ 300 MB)',
+  files: F.filter(f => VIDEO.test(f.e) && f.s >= 300*MB), lv:'Tùy chọn · video thành phẩm, nên có bản sao lưu ở nơi khác',
+  body: () => `${cats_list('exp')}. Nếu đã nộp/đăng tải và có bản trên cloud, có thể chuyển khỏi máy.`});
+function cats_list(k){ const c = cats.find(c=>c.key===k); return c.files.slice(0,3).map(f=>`<code>${esc(f.p)}</code> (${fmt(f.s)})`).join(', ') + (c.files.length>3?` và ${c.files.length-3} file khác`:''); }
+function topDirs(c){ const m = {}; c.files.forEach(f => { const d = segs(f.p).slice(0,-1).slice(0,4).join('\\') || '(gốc)'; m[d] = (m[d]||0) + f.s; });
+  return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([d,s]) => `<code>${esc(d)}</code> (${fmt(s)})`).join(', '); }
+const safe = cats.filter(c => c.cls !== 'opt').reduce((x,c)=>x+c.size,0);
+const opt = cats.filter(c => c.cls === 'opt').reduce((x,c)=>x+c.size,0);
+const catOf = new Map(); cats.forEach(c => c.files.forEach(f => catOf.set(f.p, c.key)));
+
+/* ---------- header & KPIs ---------- */
+document.getElementById('h1').textContent = `Khám sức khỏe thư mục ${D.root}`;
+document.title = `Sức khỏe ${base(D.root) || D.root}`;
+const errN = D.errors ? (D.errors.enumerate||0) + (D.errors.hash||0) : 0;
+document.getElementById('sub').innerHTML = `Quét lúc ${esc(D.scanned)} · ${num(F.length)} file trong ${num(D.dirs)} thư mục con · <span class="ro">chế độ chỉ đọc</span>${errN ? ` · ${num(errN)} mục không đọc được (bị khóa/không có quyền)` : ''}`;
+document.getElementById('kpis').innerHTML = [
+  ['Tổng dung lượng', fmt(total), `${num(F.length)} file`],
+  ['Trùng nội dung', fmt(dupWasteAll), `${groups.length} nhóm · phần dư thừa`],
+  ['Giải phóng an toàn', fmt(safe), cats.filter(c=>c.cls!=='opt').map(c=>c.key==='dup'?'bản trùng':c.key==='cache'?'cache':c.key==='temp'?'file tạm':'log').filter((v,i,a)=>a.indexOf(v)===i).join(' + ') || '—', 'hl'],
+  ['Thêm nếu lưu trữ ngoài', fmt(opt), 'bản ghi gốc + video lớn'],
+].map(k => `<div class="kpi ${k[3]||''}"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="n">${k[2]}</div></div>`).join('');
+
+/* ---------- tooltip ---------- */
+const tip = document.createElement('div'); tip.id = 'tip'; document.body.appendChild(tip);
+function bindTip(el, html){
+  el.addEventListener('mousemove', e => { tip.innerHTML = html(); tip.style.display = 'block';
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    tip.style.left = Math.max(8, Math.min(e.clientX + 14, innerWidth - w - 8)) + 'px';
+    tip.style.top = (e.clientY + 14 + h > innerHeight ? e.clientY - h - 10 : e.clientY + 14) + 'px'; });
+  el.addEventListener('mouseleave', () => tip.style.display = 'none');
+}
+
+/* freeable stack */
+const rest = Math.max(0, total - safe - opt);
+const stack = document.getElementById('stack');
+stack.innerHTML = cats.map(c => `<div style="width:${c.size/total*100}%;background:${c.color}"></div>`).join('');
+[...stack.children].forEach((el,i) => bindTip(el, () => `<b>${esc(cats[i].title)}</b><div class="r"><span>Dung lượng</span><span>${fmt(cats[i].size)} · ${pct(cats[i].size,total)}</span></div><div class="r"><span>Số file</span><span>${num(cats[i].count)}</span></div>`));
+document.getElementById('legend').innerHTML = cats.map(c => `<span><i style="background:${c.color}"></i>${esc(c.title.split(' (')[0])} · ${fmt(c.size)}</span>`).join('') + `<span><i style="background:var(--bar-bg);border:1px solid var(--line)"></i>Phần còn lại · ${fmt(rest)}</span>`;
+
+/* ---------- type donut + table ---------- */
+(function(){
+  const svg = document.getElementById('donut'), cx = 110, cy = 110, R = 100, r = 62;
+  let a0 = -Math.PI/2; const parts = [];
+  GV.forEach(g => {
+    if (!g.s) return;
+    let a1 = a0 + g.s/(total||1)*2*Math.PI; if (a1 - a0 >= 2*Math.PI) a1 = a0 + 2*Math.PI - 1e-4;
+    const large = a1-a0 > Math.PI ? 1 : 0, p = (rad, ang) => `${(cx+rad*Math.cos(ang)).toFixed(2)},${(cy+rad*Math.sin(ang)).toFixed(2)}`;
+    parts.push({g, d:`M${p(R,a0)} A${R},${R} 0 ${large} 1 ${p(R,a1)} L${p(r,a1)} A${r},${r} 0 ${large} 0 ${p(r,a0)} Z`});
+    a0 = a1;
+  });
+  svg.innerHTML = parts.map((x,i) => `<path data-i="${i}" d="${x.d}" fill="${x.g.c}"></path>`).join('') +
+    `<text x="110" y="104" text-anchor="middle" font-size="22" font-weight="600" fill="var(--ink)">${fmt(total)}</text><text x="110" y="126" text-anchor="middle" font-size="12" fill="var(--muted)">${num(F.length)} file</text>`;
+  svg.querySelectorAll('path').forEach(el => { const g = parts[el.dataset.i].g;
+    bindTip(el, () => `<b><span class="sw" style="background:${g.c}"></span>${g.name}</b> <span style="color:var(--muted)">${g.ext}</span><div class="r"><span>Dung lượng</span><span>${fmt(g.s)} · ${pct(g.s,total)}</span></div><div class="r"><span>Số file</span><span>${num(g.n)}</span></div>`); });
+  document.getElementById('typeTable').innerHTML = `<tr><th>Nhóm</th><th class="num">Dung lượng</th><th class="num">Tỷ lệ</th><th class="num">Số file</th></tr>` +
+    GV.map(g => `<tr><td><span class="sw" style="background:${g.c}"></span>${g.name} <span class="chip">${g.ext}</span></td><td class="num">${fmt(g.s)}</td><td class="num">${pct(g.s,total)}</td><td class="num">${num(g.n)}</td></tr>`).join('');
+})();
+
+/* ---------- bars ---------- */
+function bars(el, rows, mode){
+  const max = Math.max(1, ...rows.map(r => r[mode]));
+  el.innerHTML = rows.map(r => `<div class="bar"><div class="k" title="${esc(r.k)}">${esc(r.k)}</div><div class="t"><div class="f" style="width:${(r[mode]/max*100).toFixed(1)}%;${r.c?'background:'+r.c:''}"></div></div><div class="v">${mode==='s'?fmt(r.s):num(r.n)+' file'}</div></div>`).join('');
+  [...el.children].forEach((b,i) => { const r = rows[i]; bindTip(b, () => `<b>${esc(r.k)}</b><div class="r"><span>Dung lượng</span><span>${fmt(r.s)} · ${pct(r.s,total)}</span></div><div class="r"><span>Số file</span><span>${num(r.n)}</span></div>`); });
+}
+function group(keyFn){ const m = {}; F.forEach(f => { const k = keyFn(f); (m[k] ||= {k, s:0, n:0, fs:[]}); m[k].s += f.s; m[k].n++; m[k].fs.push(f); }); return Object.values(m); }
+const extRows = mode => {
+  const all = group(f => f.e ? '.'+f.e : '(không đuôi)').sort((a,b)=>b[mode]-a[mode]);
+  all.forEach(r => { const gs = new Set(r.fs.map(grpOf)); r.c = gs.size === 1 ? [...gs][0].c : 'var(--g0)'; });
+  const top = all.slice(0,12), oth = all.slice(12);
+  if (oth.length) top.push({k:`Khác (${oth.length} loại)`, s:oth.reduce((x,r)=>x+r.s,0), n:oth.reduce((x,r)=>x+r.n,0), c:'var(--g0)'});
+  return top;
+};
+
+/* ---------- years (stacked by type group) ---------- */
+const yearRows = group(f => String(f.y)).sort((a,b)=>a.k-b.k);
+yearRows.forEach(r => { r.parts = GV.map(g => { const fs = r.fs.filter(f => grpOf(f)===g); return {g, s:sum(fs), n:fs.length}; }); });
+document.getElementById('yearLegend').innerHTML = GV.map(g => `<span><i style="background:${g.c}"></i>${g.name}</span>`).join('');
+function years(mode){
+  const max = Math.max(1, ...yearRows.map(r=>r[mode])), H = 170, el = document.getElementById('year');
+  el.innerHTML = `<div class="cols">${yearRows.map(r => {
+    const sg = r.parts.filter(p => p[mode] > 0).map(p => ({p, h:p[mode]/max*H})).filter(x => x.h >= 1);
+    const body = sg.length ? sg.map(x => `<div style="height:${x.h.toFixed(1)}px;background:${x.p.g.c}"></div>`).join('') : `<div style="height:2px;background:var(--g0)"></div>`;
+    return `<div class="col"><div class="v">${mode==='s'?fmt(r.s):num(r.n)}</div><div class="stk">${body}</div></div>`;
+  }).join('')}</div><div class="xl">${yearRows.map(r=>`<div>${r.k}</div>`).join('')}</div>`;
+  el.querySelectorAll('.col').forEach((c,i) => { const r = yearRows[i];
+    bindTip(c, () => `<b>Năm ${r.k}</b> — ${fmt(r.s)} · ${num(r.n)} file` + r.parts.filter(p => p.n).sort((a,b)=>b[mode]-a[mode]).map(p => `<div class="r"><span><span class="sw" style="background:${p.g.c}"></span>${p.g.name}</span><span>${mode==='s'?fmt(p.s):num(p.n)+' file'}</span></div>`).join('')); });
+}
+const render = {ext: m => bars(document.getElementById('ext'), extRows(m), m), year: years};
+render.ext('s'); render.year('s');
+document.querySelectorAll('.tabs').forEach(t => t.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  t.querySelectorAll('button').forEach(x => x.classList.toggle('on', x===b));
+  render[t.dataset.for](b.dataset.m);
+}));
+if (yearRows.length) {
+  const yMax = [...yearRows].sort((a,b)=>b.n-a.n)[0], yS = [...yearRows].sort((a,b)=>b.s-a.s)[0];
+  const cutY = Math.max(...yearRows.map(r=>+r.k)) - 3, old = F.filter(f => f.y <= cutY);
+  document.getElementById('yearNote').textContent = `${pct(yMax.n, F.length)} số file được sửa trong năm ${yMax.k}; năm nặng nhất là ${yS.k} (${fmt(yS.s)}). File từ ${cutY} trở về trước: ${num(old.length)} file, ${fmt(sum(old))} (${pct(sum(old), total)} dung lượng).`;
+}
+
+/* ---------- first-level folders ---------- */
+bars(document.getElementById('dirs'), group(f => f.p.includes('\\') ? segs(f.p)[0] : '(gốc)').sort((a,b)=>b.s-a.s).slice(0,15), 's');
+
+/* ---------- top 10 ---------- */
+const top = [...F].sort((a,b)=>b.s-a.s).slice(0,10);
+const BADGE = {seclog:['d','Đề xuất: xóa'], log:['d','Đề xuất: dọn log'], cache:['d','Đề xuất: xóa cache'], temp:['d','Đề xuất: xóa'], dup:['x','Bản trùng – có thể bỏ'], trec:['a','Đề xuất: lưu trữ ngoài'], exp:['a','Đề xuất: lưu trữ ngoài']};
+const topSum = sum(top), topFree = sum(top.filter(f => ['seclog','log','cache','temp','dup'].includes(catOf.get(f.p))));
+document.getElementById('topStats').innerHTML = `<div><b>${fmt(topSum)}</b>dung lượng của ${top.length} file</div><div><b>${pct(topSum,total)}</b>tổng thư mục, dù chỉ ${pct(top.length,F.length)} số file</div><div><b>${fmt(topFree)}</b>trong số đó xóa được an toàn</div>`;
+document.getElementById('top').innerHTML = top.map((f,i) => {
+  const s = segs(f.p), name = s.pop(), g = grpOf(f), b = BADGE[catOf.get(f.p)], dg = dupOf.get(f.p);
+  return `<div class="tr"><div class="rk">${i+1}</div><div>
+    <div class="hd"><span class="fn">${esc(name)}</span><span class="sz">${fmt(f.s)}</span></div>
+    <div class="dir">${esc(D.root)}${s.length?'\\'+esc(s.join('\\')):''}</div>
+    <div class="t"><div style="width:${(f.s/(top[0].s||1)*100).toFixed(1)}%;background:${g.c}"></div></div>
+    <div class="meta"><span><span class="sw" style="background:${g.c}"></span>${g.name}</span><span>${pct(f.s,total)} tổng</span><span>sửa ${f.m.split('-').reverse().join('/')}</span>${b?`<span class="badge ${b[0]}">${b[1]}</span>`:''}${dg && catOf.get(f.p)!=='dup'?`<span class="chip">có ${dg.files.length-1} bản trùng (nhóm #${dg.id})</span>`:''}</div>
+  </div></div>`;
+}).join('');
+
+/* ---------- duplicates by cause ---------- */
+const nestedDirs = [...new Set(groups.filter(g=>g.cause==='nested').flatMap(g => g.files.map(f => nestedAt(f.p)).filter(Boolean)))];
+const byCause = CAUSE_ORDER.map(k => ({k, c:CAUSES[k], gs:groups.filter(g => g.cause===k)})).filter(x => x.gs.length);
+const removable = byCause.filter(x => ['outside','nested','other','cache'].includes(x.k)).reduce((a,x)=>a+x.gs.reduce((b,g)=>b+g.waste,0),0);
+document.getElementById('dupHint').innerHTML = groups.length
+  ? `So khớp bằng SHA-256 trên các file cùng kích thước (giống nhau từng byte, kể cả khi tên khác). ${groups.length} nhóm, dư ${fmt(dupWasteAll)} nếu chỉ giữ một bản/nhóm; trong đó khoảng <b>${fmt(removable)}</b> bỏ được mà không ảnh hưởng dự án nào. Số # là thứ tự nhóm theo dung lượng dư.`
+  : 'Không tìm thấy file nào trùng nội dung.';
+if (groups.length) document.getElementById('causeSum').innerHTML = `<tr><th>Nguyên nhân</th><th class="num">Số nhóm</th><th class="num">Tiết kiệm</th><th>Mức an toàn</th></tr>` +
+  byCause.map(x => `<tr><td>${x.c.title}</td><td class="num">${x.gs.length}</td><td class="num">${fmt(x.gs.reduce((a,g)=>a+g.waste,0))}</td><td>${x.c.lv.split(' · ')[0]}</td></tr>`).join('');
+const causeShown = {};
+function drawCause(x){
+  const n = causeShown[x.k] ||= 15, multi = x.k === 'multi', sys = x.k === 'sys';
+  const rows = x.gs.slice(0, n).map(g => `<tr><td class="num">#${g.id}</td><td><b>${esc(base(g.keep.p))}</b> <span class="chip">${g.files.length} bản × ${fmt(g.size)}</span><ul>${g.files.map(f =>
+      `<li>${sys ? '' : f===g.keep ? '<span class="tag keep">GIỮ</span>' : multi||x.k==='autosave' ? '<span class="tag opt">TÙY</span>' : '<span class="tag del">BỎ</span>'}${esc(f.p)}</li>`).join('')}</ul></td><td class="num">${fmt(g.waste)}</td></tr>`).join('');
+  const el = document.getElementById('cause-'+x.k);
+  el.querySelector('tbody').innerHTML = rows;
+  const btn = el.querySelector('.more'); btn.style.display = n >= x.gs.length ? 'none' : ''; btn.textContent = `Xem thêm (${x.gs.length - n} nhóm)`;
+}
+document.getElementById('causes').innerHTML = byCause.map(x => `<div class="cause ${x.c.cls}" id="cause-${x.k}"><h3><span>${x.c.title}</span><span class="gb">${fmt(x.gs.reduce((a,g)=>a+g.waste,0))} · ${x.gs.length} nhóm</span></h3><div class="lv">${x.c.lv}</div><p>${x.c.body.replace('{N}', nestedDirs.slice(0,3).map(d=>`<code>${esc(d)}</code>`).join(', ') || 'X\\X')}</p><div class="tw"><table><thead><tr><th class="num">#</th><th>File và các vị trí</th><th class="num">Tiết kiệm nếu giữ 1</th></tr></thead><tbody></tbody></table></div><button class="more"></button></div>`).join('');
+byCause.forEach(x => { drawCause(x); document.querySelector(`#cause-${x.k} .more`).onclick = () => { causeShown[x.k] += 30; drawCause(x); }; });
+
+/* ---------- recommendations ---------- */
+const SENS = /(^|[\\_\- ])(pass|passw(or)?d|passwords|mat ?khau|mật khẩu|credential|credentials|secret)s?[^\\]*\.(txt|docx?|xlsx?|csv|md)$|\.(rdp|pem|ppk|kdbx|pfx|p12)$|(^|\\)id_(rsa|ed25519)$|(^|\\)\.env$/i;
+const sens = F.filter(f => SENS.test(f.p) && !isSslLog(f));
+document.getElementById('recs').innerHTML = (cats.length ? cats.map(c => `<div class="rec ${c.cls}"><h3><span>${c.title}</span><span class="gb">${fmt(c.size)} · ${num(c.count)} file</span></h3><div class="lv">${c.lv}</div><p>${c.body()}</p></div>`).join('') : '<p class="hint">Không có mục nào cần dọn — thư mục khá gọn.</p>') +
+  (sens.length ? `<div class="rec sec"><h3><span>Lưu ý bảo mật: file có thể chứa thông tin nhạy cảm</span></h3><div class="lv">Không ảnh hưởng dung lượng · chỉ xét theo tên file, chưa mở nội dung</div><p>${sens.slice(0,8).map(f=>`<code>${esc(f.p)}</code>`).join(', ')}${sens.length>8?` và ${sens.length-8} file khác`:''}. Nếu có mật khẩu/khóa ở dạng văn bản thường, nên chuyển vào trình quản lý mật khẩu rồi xóa file.</p></div>` : '');
+document.getElementById('total').innerHTML = `<span>Giải phóng an toàn: <b>${fmt(safe)}</b></span><span>Tối đa nếu lưu trữ ngoài: <b>${fmt(safe+opt)}</b></span><span style="color:var(--muted)">≈ ${pct(safe+opt, total)} tổng ${fmt(total)}</span>`;
+
+/* ---------- empty dirs & zero-byte files ---------- */
+const ed = D.emptyDirs || [], zero = F.filter(f => f.s === 0);
+document.getElementById('emptyHint').textContent = `${num(ed.length)} thư mục rỗng, ${num(zero.length)} file 0 byte. Thư mục rỗng thường do phần mềm tự tạo và sẽ tạo lại khi chạy; xóa chỉ làm gọn, không lấy lại dung lượng. File 0 byte có thể là file giữ chỗ của ứng dụng — chỉ xóa khi chắc chắn.`;
+document.getElementById('empty').innerHTML = (ed.length||zero.length) ? `<tr><th>Đường dẫn</th><th>Loại</th></tr>` + ed.map(p => `<tr><td class="path">${esc(p)}</td><td>thư mục rỗng</td></tr>`).join('') + zero.map(f => `<tr><td class="path">${esc(f.p)}</td><td>file 0 byte</td></tr>`).join('') : '';
+
+document.getElementById('foot').textContent = `Báo cáo tạo tự động ở chế độ chỉ đọc: chỉ đọc siêu dữ liệu và băm nội dung để so trùng; không file nào trong ${D.root} bị xóa, di chuyển hay thay đổi. Ngày sửa là LastWriteTime của Windows.`;
+</script>
+</body>
+</html>

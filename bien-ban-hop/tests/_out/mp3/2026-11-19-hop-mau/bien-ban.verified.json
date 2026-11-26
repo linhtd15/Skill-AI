@@ -1,0 +1,428 @@
+{
+  "meta": {
+    "tieu_de": "Họp kế hoạch bán hàng Tết 2027",
+    "muc_dich": "Chốt ngân sách quảng cáo và phân công chuẩn bị chương trình khuyến mãi Tết 2027.",
+    "ngay_hop": "2026-11-19",
+    "gio_bat_dau": "09:00",
+    "gio_ket_thuc": null,
+    "dia_diem": null,
+    "hinh_thuc": "Trực tuyến (bản ghi video)",
+    "co_quan": null,
+    "so": null,
+    "dia_danh": null,
+    "so_ban": null,
+    "chu_tri": "Trần Minh Hoàng",
+    "thu_ky": "Phạm Ngọc Lan",
+    "nguon": "hop-mau.mp3"
+  },
+  "nguoi_tham_gia": [
+    {
+      "ten": "Trần Minh Hoàng",
+      "email": "hoang.tm@example.com",
+      "vai_tro": "Giám đốc kinh doanh (chủ trì)"
+    },
+    {
+      "ten": "Nguyễn Thu Hà",
+      "email": "ha.nt@example.com",
+      "vai_tro": "Trưởng nhóm Marketing"
+    },
+    {
+      "ten": "Lê Văn Đức",
+      "email": "duc.lv@example.com",
+      "vai_tro": "Kế toán"
+    },
+    {
+      "ten": "Phạm Ngọc Lan",
+      "email": null,
+      "vai_tro": "Chăm sóc khách hàng (thư ký)"
+    }
+  ],
+  "tom_tat": [
+    "Doanh số online quý III tăng 12%, chi phí quảng cáo mỗi đơn tăng khoảng 8%.",
+    "Chốt ngân sách quảng cáo Tết 450 triệu đồng, không xin thêm.",
+    "Thống nhất giảm 15% cho đơn từ 1 triệu đồng, kèm quà tặng hộp lì xì.",
+    "Giao 4 việc có người phụ trách; việc kiểm tra tồn kho chưa có người nhận.",
+    "Rủi ro vận chuyển quá tải dịp Tết; đơn vị dự phòng chưa quyết."
+  ],
+  "chu_de": [
+    {
+      "id": "T1",
+      "tieu_de": "Khai mạc và mục tiêu cuộc họp",
+      "tom_tat": "Anh Hoàng chủ trì, nêu mục tiêu chốt ngân sách quảng cáo và phân công chuẩn bị khuyến mãi; chị Lan nhận ghi biên bản.",
+      "trich_dan": [
+        {
+          "text": "Mục tiêu là chốt ngân sách quảng cáo và phân công chuẩn bị chương trình khuyến mãi",
+          "chinh": true,
+          "seg": 2,
+          "t": 12.92,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        },
+        {
+          "text": "Mời chị Lan ghi biên bản giúp anh",
+          "seg": 3,
+          "t": 18.61,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "bat_dau": 12.92
+    },
+    {
+      "id": "T2",
+      "tieu_de": "Kết quả chiến dịch quý III",
+      "tom_tat": "Chị Hà báo cáo doanh số online tăng 12%, chi phí quảng cáo mỗi đơn tăng khoảng 8%; mạng xã hội hiệu quả nhất, video ngắn chưa đạt kỳ vọng.",
+      "trich_dan": [
+        {
+          "text": "chi phí quảng cáo trên mỗi đơn hàng cũng tăng khoảng 8%",
+          "seg": 7,
+          "t": 34.76,
+          "speaker": "S3",
+          "nguoi": "Nguyễn Thu Hà",
+          "chinh": true
+        },
+        {
+          "text": "Còn video ngắn thì chưa đạt kỳ vọng",
+          "seg": 8,
+          "t": 42.0,
+          "speaker": "S3",
+          "nguoi": "Nguyễn Thu Hà"
+        }
+      ],
+      "bat_dau": 34.76
+    },
+    {
+      "id": "T3",
+      "tieu_de": "Ngân sách quảng cáo Tết",
+      "tom_tat": "Chị Hà đề xuất 500 triệu; anh Đức cho biết mức duyệt tối đa 450 triệu, vượt phải xin Tổng Giám đốc khoảng 2 tuần. Chủ trì chốt 450 triệu.",
+      "trich_dan": [
+        {
+          "text": "Ngân sách tối đa công ty Duyệt được là 450 triệu đồng cho cả chiến dịch",
+          "seg": 11,
+          "t": 56.76,
+          "speaker": "S4",
+          "nguoi": "Lê Văn Đức"
+        },
+        {
+          "text": "Em đề xuất 500 triệu",
+          "seg": 12,
+          "t": 62.25,
+          "speaker": "S3",
+          "nguoi": "Nguyễn Thu Hà"
+        },
+        {
+          "text": "Nếu vượt 450 triệu thì phải xin thêm phê duyệt của Tổng Giám đốc",
+          "seg": 13,
+          "t": 68.26,
+          "speaker": "S4",
+          "nguoi": "Lê Văn Đức"
+        },
+        {
+          "text": "Vậy chúng ta chúc ngân sách quảng cáo Tết là 450 triệu đồng",
+          "chinh": true,
+          "seg": 14,
+          "t": 75.19,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "bat_dau": 56.76
+    },
+    {
+      "id": "T4",
+      "tieu_de": "Chương trình khuyến mãi",
+      "tom_tat": "Chị Hà đề xuất giảm 15% cho đơn từ 1 triệu kèm quà tặng; chủ trì thống nhất và giao chị Hà hoàn thiện kế hoạch truyền thông.",
+      "trich_dan": [
+        {
+          "text": "Bên em đề xuất giảm giá 15% cho đơn từ 1 triệu",
+          "seg": 17,
+          "t": 87.81,
+          "speaker": "S3",
+          "nguoi": "Nguyễn Thu Hà"
+        },
+        {
+          "text": "Thống nhất phương án giảm 15% cho đơn từ 1 triệu đồng",
+          "chinh": true,
+          "seg": 18,
+          "t": 94.16,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        },
+        {
+          "text": "Chị Hà phụ trách hoàn thiện kế hoạch truyền thông",
+          "seg": 19,
+          "t": 99.08,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "bat_dau": 87.81
+    },
+    {
+      "id": "T5",
+      "tieu_de": "Quà tặng và tồn kho",
+      "tom_tat": "Anh Đức nhận lấy báo giá hộp lì xì, chị Lan lo in thiệp cảm ơn; việc kiểm tra tồn kho chưa có người nhận.",
+      "trich_dan": [
+        {
+          "text": "tôi sẽ lấy báo giá của 3 nhà cung cấp trước ngày 23 tháng 11",
+          "chinh": true,
+          "seg": 20,
+          "t": 104.76,
+          "speaker": "S4",
+          "nguoi": "Lê Văn Đức"
+        },
+        {
+          "text": "Em lo phần đặt im thiệp cảm ơn khách hàng",
+          "seg": 21,
+          "t": 111.53,
+          "speaker": "S2",
+          "nguoi": "Phạm Ngọc Lan"
+        },
+        {
+          "text": "hôm nay chưa có người nhận, cần hỏi lại bộ phận kho",
+          "seg": 22,
+          "t": 115.16,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "bat_dau": 104.76
+    },
+    {
+      "id": "T6",
+      "tieu_de": "Rủi ro vận chuyển và kết thúc",
+      "tom_tat": "Chị Lan lo ngại vận chuyển quá tải dịp Tết; đơn vị dự phòng chưa quyết. Anh Đức nhận lập bảng theo dõi chi phí quảng cáo.",
+      "trich_dan": [
+        {
+          "text": "các đơn vị vận chuyển thường quá tải, có thể giao hàng chậm",
+          "chinh": true,
+          "seg": 23,
+          "t": 121.32,
+          "speaker": "S2",
+          "nguoi": "Phạm Ngọc Lan"
+        },
+        {
+          "text": "Đây là rủi ro lớn",
+          "seg": 24,
+          "t": 126.78,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        },
+        {
+          "text": "Cảm ơn mọi người, cuộc họp kết thúc",
+          "seg": 28,
+          "t": 144.23,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "bat_dau": 121.32
+    }
+  ],
+  "quyet_dinh": [
+    {
+      "id": "QĐ1",
+      "noi_dung": "Ngân sách quảng cáo Tết là 450 triệu đồng, không xin thêm.",
+      "chu_de": "T3",
+      "trich_dan": [
+        {
+          "text": "Vậy chúng ta chúc ngân sách quảng cáo Tết là 450 triệu đồng",
+          "seg": 14,
+          "t": 75.19,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        },
+        {
+          "text": "không xin thêm",
+          "seg": 14,
+          "t": 75.19,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ]
+    },
+    {
+      "id": "QĐ2",
+      "noi_dung": "Áp dụng giảm giá 15% cho đơn từ 1 triệu đồng.",
+      "chu_de": "T4",
+      "trich_dan": [
+        {
+          "text": "Thống nhất phương án giảm 15% cho đơn từ 1 triệu đồng",
+          "seg": 18,
+          "t": 94.16,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ]
+    }
+  ],
+  "hanh_dong": [
+    {
+      "id": "V1",
+      "cong_viec": "Hoàn thiện kế hoạch truyền thông chương trình khuyến mãi, gửi chủ trì.",
+      "phu_trach": "Nguyễn Thu Hà",
+      "han": "2026-11-27",
+      "han_goc": "thứ 6 tuần sau",
+      "chu_de": "T4",
+      "trich_dan": [
+        {
+          "text": "Chị Hà phụ trách hoàn thiện kế hoạch truyền thông, gửi tôi trước thứ 6 tuần sau",
+          "seg": 19,
+          "t": 99.08,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ],
+      "can_cu_phu_trach": "được nêu tên bởi Trần Minh Hoàng",
+      "han_kieu": "tuong_doi"
+    },
+    {
+      "id": "V2",
+      "cong_viec": "Lấy báo giá hộp lì xì của 3 nhà cung cấp.",
+      "phu_trach": "Lê Văn Đức",
+      "han": "2026-11-23",
+      "han_goc": "ngày 23 tháng 11",
+      "chu_de": "T5",
+      "trich_dan": [
+        {
+          "text": "tôi sẽ lấy báo giá của 3 nhà cung cấp trước ngày 23 tháng 11",
+          "seg": 20,
+          "t": 104.76,
+          "speaker": "S4",
+          "nguoi": "Lê Văn Đức"
+        }
+      ],
+      "can_cu_phu_trach": "tự nhận việc",
+      "han_kieu": "tuyet_doi"
+    },
+    {
+      "id": "V3",
+      "cong_viec": "Đặt in thiệp cảm ơn khách hàng.",
+      "phu_trach": "Phạm Ngọc Lan",
+      "han": null,
+      "han_goc": null,
+      "chu_de": "T5",
+      "trich_dan": [
+        {
+          "text": "Em lo phần đặt im thiệp cảm ơn khách hàng",
+          "seg": 21,
+          "t": 111.53,
+          "speaker": "S2",
+          "nguoi": "Phạm Ngọc Lan"
+        }
+      ],
+      "can_cu_phu_trach": "tự nhận việc"
+    },
+    {
+      "id": "V4",
+      "cong_viec": "Kiểm tra tồn kho trước Tết (hỏi lại bộ phận kho).",
+      "phu_trach": null,
+      "han": null,
+      "han_goc": null,
+      "chu_de": "T5",
+      "trich_dan": [
+        {
+          "text": "Còn việc kiểm tra tồn kho trước Tết thì hôm nay chưa có người nhận",
+          "seg": 22,
+          "t": 115.16,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ]
+    },
+    {
+      "id": "V5",
+      "cong_viec": "Lập bảng theo dõi chi phí quảng cáo hằng tuần.",
+      "phu_trach": "Lê Văn Đức",
+      "han": "2026-12-04",
+      "han_goc": "ngày 4 tháng 12",
+      "chu_de": "T6",
+      "trich_dan": [
+        {
+          "text": "Anh Đức giao cho bên kế toán lập bản theo dõi chi phí quảng cáo hàng tuần, hàng chốc ngày 4 tháng 12",
+          "seg": 26,
+          "t": 134.18,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        },
+        {
+          "text": "Vâng, tôi nhận",
+          "seg": 27,
+          "t": 141.29,
+          "speaker": "S4",
+          "nguoi": "Lê Văn Đức"
+        }
+      ],
+      "can_cu_phu_trach": "tự nhận việc",
+      "han_kieu": "tuyet_doi"
+    }
+  ],
+  "van_de_mo": [
+    {
+      "id": "M1",
+      "noi_dung": "Chưa quyết việc chọn thêm đơn vị vận chuyển dự phòng dịp Tết.",
+      "loai": "RUI_RO",
+      "chu_de": "T6",
+      "trich_dan": [
+        {
+          "text": "Việc chọn thêm đơn vị vận chuyển dự phòng thì chưa quyết",
+          "seg": 25,
+          "t": 129.03,
+          "speaker": "S1",
+          "nguoi": "Trần Minh Hoàng"
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "noi_dung": "Kênh video ngắn chưa đạt kỳ vọng, cuộc họp chưa bàn hướng xử lý.",
+      "loai": "CON_MO",
+      "chu_de": "T2",
+      "trich_dan": [
+        {
+          "text": "Còn video ngắn thì chưa đạt kỳ vọng",
+          "seg": 8,
+          "t": 42.0,
+          "speaker": "S3",
+          "nguoi": "Nguyễn Thu Hà"
+        }
+      ]
+    }
+  ],
+  "bo_qua": [
+    {
+      "seg": 4,
+      "ly_do": "Thủ tục/tự giới thiệu (kiểm thử MP3)"
+    },
+    {
+      "seg": 10,
+      "ly_do": "Thủ tục/tự giới thiệu (kiểm thử MP3)"
+    }
+  ],
+  "can_lam_ro": [
+    {
+      "muc": "Địa điểm/nền tảng họp",
+      "cau_hoi": "Cuộc họp tổ chức trên nền tảng nào hoặc tại phòng nào?"
+    },
+    {
+      "muc": "Giờ kết thúc",
+      "cau_hoi": "Cuộc họp kết thúc lúc mấy giờ (bản ghi dài 2 phút 33 giây)?"
+    },
+    {
+      "muc": "QĐ1 – lỗi phiên âm",
+      "cau_hoi": "Đoạn 01:15 phiên âm là “chúc ngân sách”; nghe lại để xác nhận là “chốt ngân sách”?"
+    },
+    {
+      "muc": "V3 – thời hạn",
+      "cau_hoi": "Việc in thiệp cảm ơn khách hàng cần xong trước ngày nào?"
+    },
+    {
+      "muc": "V4 – người phụ trách",
+      "cau_hoi": "Ai phụ trách kiểm tra tồn kho trước Tết?"
+    },
+    {
+      "muc": "Email chị Lan",
+      "cau_hoi": "Địa chỉ email của chị Phạm Ngọc Lan là gì?"
+    }
+  ]
+}

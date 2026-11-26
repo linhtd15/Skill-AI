@@ -1,0 +1,10 @@
+Các câu chứa từ khoá – PHẢI đưa vào biên bản hoặc ghi vào 'bo_qua' kèm lý do:
+#1 [00:06] Trần Minh Hoàng (S1): Chào mọi người, tôi là Hoàng, hôm nay tôi chủ trì cuộc họp kế hoạch bán hàng Tết năm 2027. Mục tiêu là chốt ngân sách quảng cáo và phân công chuẩn bị chương trình khuyến mãi.
+#3 [00:22] Phạm Ngọc Lan (S2): Dạ vâng, em là Lan, em sẽ ghi biên bản cuộc họp hôm nay.
+#8 [00:54] Lê Văn Đức (S4): Tôi là Đức, phụ trách kế toán. Ngân sách tối đa công ty duyệt được là bốn trăm năm mươi triệu đồng cho cả chiến dịch.
+#11 [01:15] Trần Minh Hoàng (S1): Vậy chúng ta chốt ngân sách quảng cáo Tết là bốn trăm năm mươi triệu đồng, không xin thêm.
+#14 [01:34] Trần Minh Hoàng (S1): Thống nhất phương án giảm mười lăm phần trăm cho đơn từ một triệu đồng.
+#15 [01:39] Trần Minh Hoàng (S1): Chị Hà phụ trách hoàn thiện kế hoạch truyền thông, gửi tôi trước thứ Sáu tuần sau.
+#16 [01:45] Lê Văn Đức (S4): Về hộp lì xì, tôi sẽ lấy báo giá của ba nhà cung cấp trước ngày 23 tháng 11.
+#21 [02:14] Trần Minh Hoàng (S1): Anh Đức giao cho bên kế toán lập bảng theo dõi chi phí quảng cáo hằng tuần, hạn chót ngày 4 tháng 12.
+#22 [02:21] Lê Văn Đức (S4): Vâng, tôi nhận.
