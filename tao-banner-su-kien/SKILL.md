@@ -52,5 +52,11 @@ Chỉ sửa giá trị trong `this.state` của constructor (chữ, `count`, `st
 
 ## Lưu ý kỹ thuật (đừng phá)
 - Ảnh do người dùng tải lên là data URL trong state; gán vào `style` qua **object** (`style="{{ s.photoStyle }}"`), không nối chuỗi style — data URL chứa `;` sẽ làm hỏng chuỗi style.
-- Không dùng `background-clip: text`, `filter` CSS hay `object-fit` trên banner — html2canvas bỏ qua. Hiệu ứng phát sáng của ổ khóa dùng filter SVG nội bộ (html2canvas vẽ được).
-- Gọi html2canvas với `width: 1200, height: 628, scale: 1|2, scrollY: -window.scrollY`, chờ `document.fonts.ready` trước khi chụp.
+Đã kiểm thử với html2canvas 1.4.1 — các lỗi sau làm ảnh xuất "xô lệch" so với preview, đừng tái phạm:
+- **Chụp bản sao cô lập** (`onclone`): xóa mọi node khác trong body bản sao, reset `transform`/`zoom`, đặt banner một mình ở 0,0; tùy chọn `x:0, y:0, scrollX:0, scrollY:0, windowWidth:1200, windowHeight:628, width:1200, height:628`. Artboard trên canvas bị thu phóng bằng CSS transform và trang bị cuộn — chụp thẳng phần tử gốc (hoặc dùng `scrollY: -window.scrollY`) cho ra ảnh co nhỏ, chữ đè nhau.
+- **SVG đặt `position:absolute` + `left/top` bị cộng vị trí hai lần** → luôn bọc SVG trong một `<div>` định vị, SVG bên trong `display:block` và có thuộc tính `width`/`height`.
+- **Không dùng `<filter>` trong SVG** (ổ khóa biến mất) — tạo quầng sáng bằng một nét vẽ rộng, mờ đặt dưới nét chính.
+- **`box-shadow` có spread trên khung ảnh tròn sẽ phủ lên ảnh** → đặt quầng sáng ở lớp div riêng nằm dưới ảnh.
+- **`backdrop-filter` và `inset` box-shadow vẽ thành khối tối sau chữ** → bỏ inset; tắt `backdrop-filter` trong `onclone`.
+- Không dùng `background-clip: text`, `filter` CSS, `object-fit` trên banner.
+- Trước khi chụp: `document.fonts.load` các weight 400–800 của Be Vietnam Pro rồi `await document.fonts.ready`.

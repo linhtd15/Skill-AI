@@ -70,7 +70,8 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
     </sc-if>
 
     <sc-if value="{{ decorCircuit }}" hint-placeholder-val="{{ false }}">
-      <svg aria-hidden="true" width="1200" height="628" viewBox="0 0 1200 628" style="position: absolute; left: 0; top: 0;" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <div style="position: absolute; left: 0; top: 0; width: 1200px; height: 628px;">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" style="display: block;" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <g stroke="{{ a1 }}" stroke-opacity="{{ circuitOp }}" stroke-width="1.6">
           <path d="M0 96 H120 L150 126 H262"></path>
           <path d="M0 560 H80 L110 530 H200 L230 500 H300"></path>
@@ -96,23 +97,26 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
           <circle cx="520" cy="46" r="4"></circle>
         </g>
       </svg>
+      </div>
     </sc-if>
 
     <sc-if value="{{ showLock }}" hint-placeholder-val="{{ true }}">
-      <svg aria-hidden="true" width="300" height="300" viewBox="0 0 300 300" style="position: absolute; left: 470px; top: 300px;">
-        <defs>
-          <filter id="lockGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="b"></feGaussianBlur>
-            <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-          </filter>
-        </defs>
-        <g filter="url(#lockGlow)" opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="7" stroke-linecap="round">
+      <div style="position: absolute; left: 470px; top: 300px; width: 300px; height: 300px;">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" style="display: block;">
+        <g opacity="{{ lockHaloOp }}" fill="none" stroke="{{ a1 }}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M100 135 V100 a50 50 0 0 1 100 0 V135"></path>
+          <rect x="75" y="135" width="150" height="120" rx="20"></rect>
+          <circle cx="150" cy="185" r="14"></circle>
+          <path d="M150 199 V225"></path>
+        </g>
+        <g opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="7" stroke-linecap="round">
           <path d="M100 135 V100 a50 50 0 0 1 100 0 V135"></path>
           <rect x="75" y="135" width="150" height="120" rx="20"></rect>
           <circle cx="150" cy="185" r="14"></circle>
           <path d="M150 199 V225"></path>
         </g>
       </svg>
+      </div>
     </sc-if>
 
     <div style="{{ t.bottomLine }}"></div>
@@ -181,7 +185,9 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
     <div style="position: absolute; left: 700px; top: 48px; width: 460px; height: 532px;">
       <sc-for list="{{ slots }}" as="s" hint-placeholder-count="1">
         <div style="{{ s.wrapStyle }}">
-          <svg aria-hidden="true" viewBox="0 0 200 200" style="{{ s.ringStyle }}">
+          <div style="{{ s.glowStyle }}"></div>
+          <div style="{{ s.ringStyle }}">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="{{ s.ring }}" height="{{ s.ring }}" viewBox="0 0 200 200" style="display: block;">
             <circle cx="100" cy="100" r="97" fill="none" stroke="{{ a1 }}" stroke-opacity="0.35" stroke-width="0.8" stroke-dasharray="1.5 4"></circle>
             <circle cx="100" cy="100" r="89" fill="none" stroke="{{ a1 }}" stroke-opacity="0.55" stroke-width="1.4" stroke-dasharray="46 12 6 12"></circle>
             <circle cx="100" cy="100" r="81" fill="none" stroke="{{ a2 }}" stroke-opacity="0.85" stroke-width="2.2" stroke-dasharray="70 440" stroke-linecap="round" transform="rotate(-140 100 100)"></circle>
@@ -190,9 +196,12 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
             <circle cx="168.6" cy="31.4" r="2.4" fill="{{ a2 }}"></circle>
             <circle cx="31.4" cy="168.6" r="2" fill="{{ a1 }}"></circle>
           </svg>
+          </div>
           <div style="{{ s.photoStyle }}">
             <sc-if value="{{ s.noPhoto }}" hint-placeholder-val="{{ true }}">
-              <svg aria-hidden="true" viewBox="0 0 100 100" style="position: absolute; left: 22%; top: 20%; width: 56%; height: 70%;" fill="none" stroke="{{ a1 }}" stroke-opacity="0.6" stroke-width="3"><circle cx="50" cy="34" r="18"></circle><path d="M14 98c3-22 18-34 36-34s33 12 36 34"></path></svg>
+              <div style="position: absolute; left: 22%; top: 20%; width: 56%; height: 70%;">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" style="display: block; width: 100%; height: 100%;" fill="none" stroke="{{ a1 }}" stroke-opacity="0.6" stroke-width="3"><circle cx="50" cy="34" r="18"></circle><path d="M14 98c3-22 18-34 36-34s33 12 36 34"></path></svg>
+              </div>
             </sc-if>
           </div>
         </div>
@@ -546,11 +555,36 @@ class Component extends DCLogic {
     if (!this.bannerEl) return;
     this.setState({ busy: true, err: '' });
     try {
-      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      if (document.fonts) {
+        try {
+          await Promise.all([400, 500, 600, 700, 800].map((w) => document.fonts.load(w + " 16px 'Be Vietnam Pro'", 'Đăng ký Ệ')));
+        } catch (e) { /* fall through to fonts.ready */ }
+        await document.fonts.ready;
+      }
       const s = this.state.scale;
+      const bg = this.state.bg1;
+      // Capture an isolated copy: the artboard can be zoomed (CSS transform) or scrolled,
+      // which made html2canvas squeeze and shift the old export. In the clone we drop every
+      // other node, reset transforms and place the banner alone at 0,0 in a 1200x628 window.
       const canvas = await window.html2canvas(this.bannerEl, {
-        scale: s, width: 1200, height: 628, backgroundColor: this.state.bg1,
-        useCORS: true, logging: false, scrollX: 0, scrollY: -window.scrollY
+        scale: s, width: 1200, height: 628, x: 0, y: 0,
+        scrollX: 0, scrollY: 0, windowWidth: 1200, windowHeight: 628,
+        backgroundColor: bg, useCORS: true, logging: false,
+        onclone: (doc, el) => {
+          doc.documentElement.style.cssText = 'margin:0;padding:0;transform:none;zoom:1;overflow:hidden;background:' + bg;
+          const body = doc.body;
+          while (body.firstChild) body.removeChild(body.firstChild);
+          body.style.cssText = 'margin:0;padding:0;transform:none;zoom:1;width:1200px;height:628px;overflow:hidden';
+          el.style.position = 'relative';
+          el.style.left = '0px';
+          el.style.top = '0px';
+          el.style.margin = '0px';
+          el.style.transform = 'none';
+          el.style.boxShadow = 'none';
+          // html2canvas 1.4.1 draws backdrop-filter as dark blocks behind text
+          el.querySelectorAll('*').forEach((n) => { n.style.backdropFilter = 'none'; n.style.webkitBackdropFilter = 'none'; });
+          body.appendChild(el);
+        }
       });
       const url = canvas.toDataURL('image/png');
       const a = document.createElement('a');
@@ -678,7 +712,6 @@ class Component extends DCLogic {
       const photo = {
         position: 'absolute', left: '0px', top: '0px', width: Ly.size + 'px', height: Ly.size + 'px',
         boxSizing: 'border-box', borderRadius: '50%', border: '3px solid ' + st.a1, overflow: 'hidden',
-        boxShadow: '0 0 0 6px ' + rgba(st.a1, 0.14) + ', 0 0 30px ' + rgba(st.a1, L ? 0.35 : 0.55),
         backgroundColor: L ? '#E2E8F0' : '#0E1A33'
       };
       if (sp.photo) {
@@ -692,7 +725,11 @@ class Component extends DCLogic {
       return {
         name: sp.name, role: sp.role, noPhoto: !sp.photo,
         wrapStyle: { position: 'absolute', left: Ly.px + 'px', top: Ly.py + 'px', width: Ly.size + 'px', height: Ly.size + 'px' },
-        ringStyle: { position: 'absolute', left: -off + 'px', top: -off + 'px', width: ring + 'px', height: ring + 'px', overflow: 'visible' },
+        ring: ring,
+        ringStyle: { position: 'absolute', left: -off + 'px', top: -off + 'px', width: ring + 'px', height: ring + 'px' },
+        // glow lives on its own layer: html2canvas paints a spread box-shadow over a photo that carries it
+        glowStyle: { position: 'absolute', left: '0px', top: '0px', width: Ly.size + 'px', height: Ly.size + 'px', borderRadius: '50%',
+          boxShadow: '0 0 0 6px ' + rgba(st.a1, 0.14) + ', 0 0 30px ' + rgba(st.a1, L ? 0.35 : 0.55) },
         photoStyle: photo,
         cardStyle: {
           position: 'absolute', left: Ly.cx + 'px', top: Ly.cy + 'px', width: Ly.cw + 'px', boxSizing: 'border-box',
@@ -700,7 +737,7 @@ class Component extends DCLogic {
           background: L ? 'rgba(255,255,255,0.8)' : 'rgba(15,23,42,0.66)',
           border: '1px solid ' + (L ? rgba(st.a1, 0.35) : rgba(mix(st.a1, '#FFFFFF', 0.5), 0.25)),
           backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-          boxShadow: L ? '0 12px 30px rgba(15,23,42,0.12)' : '0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)'
+          boxShadow: L ? '0 12px 30px rgba(15,23,42,0.12)' : '0 12px 30px rgba(0,0,0,0.35)'
         },
         nameStyle: { fontSize: Ly.nf + 'px', fontWeight: 700, lineHeight: 1.25, color: t.ink },
         roleStyle: { marginTop: '4px', fontSize: Ly.rf + 'px', fontWeight: 500, lineHeight: 1.35, color: t.a1Text }
@@ -788,7 +825,8 @@ class Component extends DCLogic {
       decorMatrix: t.S.decor === 'matrix',
       decorCircuit: t.S.decor === 'circuit',
       showLock: t.S.decor !== 'minimal',
-      lockOp: L ? 0.14 : 0.16,
+      lockOp: L ? 0.16 : 0.2,
+      lockHaloOp: L ? 0.05 : 0.07,
       circuitOp: L ? 0.4 : 0.35,
       circuitDotOp: L ? 0.7 : 0.6,
       rain: rain,
