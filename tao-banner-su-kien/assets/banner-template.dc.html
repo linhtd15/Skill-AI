@@ -54,14 +54,73 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
 </style>
 </helmet>
 
-<div style="width: 1280px; min-height: 2150px; box-sizing: border-box; padding: 40px; background: #030712; display: flex; flex-direction: column; gap: 28px;">
+<div style="width: 1280px; min-height: 2740px; box-sizing: border-box; padding: 40px; background: #030712; display: flex; flex-direction: column; gap: 28px;">
 
   <!-- ===================== BANNER 1200x628 ===================== -->
   <div ref="{{ bannerRef }}" style="{{ t.root }}">
 
-    <div style="{{ t.grid }}"></div>
-    <div style="{{ t.glow1 }}"></div>
-    <div style="{{ t.glow2 }}"></div>
+    <!-- soft colour blobs (Cực quang / Kính mờ) -->
+    <sc-if value="{{ decorBlobs }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ t.blob1 }}"></div>
+      <div style="{{ t.blob2 }}"></div>
+      <div style="{{ t.blob3 }}"></div>
+    </sc-if>
+    <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+      <div style="{{ t.grid }}"></div>
+    </sc-if>
+    <sc-if value="{{ showGlow }}" hint-placeholder-val="{{ true }}">
+      <div style="{{ t.glow1 }}"></div>
+      <div style="{{ t.glow2 }}"></div>
+    </sc-if>
+
+    <!-- Kính mờ: frosted panels -->
+    <sc-if value="{{ decorGlass }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ t.gc1 }}"></div>
+      <div style="{{ t.gc2 }}"></div>
+      <div style="{{ t.glassPanel }}"></div>
+    </sc-if>
+
+    <!-- Sóng ánh sáng -->
+    <sc-if value="{{ decorWaves }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 0; top: 0; width: 1200px; height: 628px;">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" style="display: block;" fill="none">
+          <path d="M0 596 C 300 540, 600 640, 900 572 S 1150 548, 1200 566 V628 H0 Z" fill="{{ a1 }}" fill-opacity="{{ waveFillA }}"></path>
+          <path d="M0 612 C 260 572, 560 650, 860 598 S 1130 584, 1200 600 V628 H0 Z" fill="{{ a2 }}" fill-opacity="{{ waveFillB }}"></path>
+          <g stroke="{{ a1 }}" stroke-opacity="{{ waveLineA }}" stroke-width="1.6">
+            <path d="M0 560 C 220 520, 420 610, 640 548 S 1000 420, 1200 452"></path>
+            <path d="M0 576 C 240 536, 440 626, 660 564 S 1020 444, 1200 480"></path>
+            <path d="M720 0 C 820 90, 1000 40, 1200 124"></path>
+          </g>
+          <g stroke="{{ a2 }}" stroke-opacity="{{ waveLineB }}" stroke-width="1.6">
+            <path d="M0 592 C 260 552, 460 640, 680 580 S 1040 468, 1200 508"></path>
+            <path d="M780 0 C 870 112, 1040 72, 1200 164"></path>
+          </g>
+        </svg>
+      </div>
+    </sc-if>
+
+    <!-- Mạng hạt -->
+    <sc-if value="{{ decorNetwork }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 0; top: 0; width: 1200px; height: 628px;">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" style="display: block;" fill="none" stroke-linecap="round">
+          <path d="{{ netLines }}" stroke="{{ a1 }}" stroke-opacity="{{ netLineOp }}" stroke-width="1"></path>
+          <path d="{{ netDots }}" stroke="{{ a2 }}" stroke-opacity="{{ netDotOp }}" stroke-width="5"></path>
+          <path d="{{ netDotsBig }}" stroke="{{ a1 }}" stroke-opacity="{{ netDotOp }}" stroke-width="8"></path>
+        </svg>
+      </div>
+    </sc-if>
+
+    <!-- Tổ ong -->
+    <sc-if value="{{ decorHex }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 0; top: 0; width: 1200px; height: 628px;">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" style="display: block;" fill="none" stroke-linejoin="round">
+          <path d="{{ hex0 }}" stroke="{{ a1 }}" stroke-opacity="{{ hexOp0 }}" stroke-width="1.3"></path>
+          <path d="{{ hex1 }}" stroke="{{ a1 }}" stroke-opacity="{{ hexOp1 }}" stroke-width="1.3"></path>
+          <path d="{{ hex2 }}" stroke="{{ a1 }}" stroke-opacity="{{ hexOp2 }}" stroke-width="1.3"></path>
+          <path d="{{ hexHi }}" stroke="{{ a2 }}" stroke-opacity="0.6" stroke-width="2"></path>
+        </svg>
+      </div>
+    </sc-if>
 
     <sc-if value="{{ decorMatrix }}" hint-placeholder-val="{{ true }}">
       <sc-for list="{{ rain }}" as="r" hint-placeholder-count="14">
@@ -100,7 +159,8 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
       </div>
     </sc-if>
 
-    <sc-if value="{{ showLock }}" hint-placeholder-val="{{ true }}">
+    <!-- watermark icon (choice: lock / shield / globe / chip / none) -->
+    <sc-if value="{{ wmLock }}" hint-placeholder-val="{{ true }}">
       <div style="position: absolute; left: 470px; top: 300px; width: 300px; height: 300px;">
       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" style="display: block;">
         <g opacity="{{ lockHaloOp }}" fill="none" stroke="{{ a1 }}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
@@ -118,6 +178,51 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
       </svg>
       </div>
     </sc-if>
+    <sc-if value="{{ wmShield }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 470px; top: 300px; width: 300px; height: 300px;">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" style="display: block;">
+        <g opacity="{{ lockHaloOp }}" fill="none" stroke="{{ a1 }}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M150 45 L235 78 V148 C235 205 198 244 150 262 C102 244 65 205 65 148 V78 Z"></path>
+          <path d="M112 152 L140 180 L192 124"></path>
+        </g>
+        <g opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M150 45 L235 78 V148 C235 205 198 244 150 262 C102 244 65 205 65 148 V78 Z"></path>
+          <path d="M112 152 L140 180 L192 124"></path>
+        </g>
+      </svg>
+      </div>
+    </sc-if>
+    <sc-if value="{{ wmGlobe }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 470px; top: 300px; width: 300px; height: 300px;">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" style="display: block;">
+        <g opacity="{{ lockHaloOp }}" fill="none" stroke="{{ a1 }}" stroke-width="22" stroke-linecap="round">
+          <circle cx="150" cy="150" r="100"></circle>
+          <ellipse cx="150" cy="150" rx="44" ry="100"></ellipse>
+          <path d="M50 150 H250 M68 100 H232 M68 200 H232"></path>
+        </g>
+        <g opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="6" stroke-linecap="round">
+          <circle cx="150" cy="150" r="100"></circle>
+          <ellipse cx="150" cy="150" rx="44" ry="100"></ellipse>
+          <path d="M50 150 H250 M68 100 H232 M68 200 H232"></path>
+        </g>
+      </svg>
+      </div>
+    </sc-if>
+    <sc-if value="{{ wmChip }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 470px; top: 300px; width: 300px; height: 300px;">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" style="display: block;">
+        <g opacity="{{ lockHaloOp }}" fill="none" stroke="{{ a1 }}" stroke-width="22" stroke-linecap="round">
+          <rect x="95" y="95" width="110" height="110" rx="14"></rect>
+          <path d="M120 95 V60 M150 95 V60 M180 95 V60 M120 205 V240 M150 205 V240 M180 205 V240 M95 120 H60 M95 150 H60 M95 180 H60 M205 120 H240 M205 150 H240 M205 180 H240"></path>
+        </g>
+        <g opacity="{{ lockOp }}" fill="none" stroke="{{ a1 }}" stroke-width="6" stroke-linecap="round">
+          <rect x="95" y="95" width="110" height="110" rx="14"></rect>
+          <rect x="125" y="125" width="50" height="50" rx="6"></rect>
+          <path d="M120 95 V60 M150 95 V60 M180 95 V60 M120 205 V240 M150 205 V240 M180 205 V240 M95 120 H60 M95 150 H60 M95 180 H60 M205 120 H240 M205 150 H240 M205 180 H240"></path>
+        </g>
+      </svg>
+      </div>
+    </sc-if>
 
     <div style="{{ t.bottomLine }}"></div>
 
@@ -130,11 +235,28 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
         <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}">
           <div style="{{ t.logoPh }}">LOGO</div>
         </sc-if>
-        <div style="{{ t.pill }}">
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"></rect><path d="M8 11V7.5a4 4 0 0 1 8 0V11"></path></svg>
-          <span style="{{ t.pillText }}">https://</span>
-          <span style="{{ t.pillSub }}">secure</span>
-        </div>
+        <sc-if value="{{ badgeOn }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ t.pill }}">
+            <sc-if value="{{ bLock }}" hint-placeholder-val="{{ true }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"></rect><path d="M8 11V7.5a4 4 0 0 1 8 0V11"></path></svg>
+            </sc-if>
+            <sc-if value="{{ bShield }}" hint-placeholder-val="{{ false }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.5-3 7.6-7 9.5-4-1.9-7-5-7-9.5V6z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg>
+            </sc-if>
+            <sc-if value="{{ bChip }}" hint-placeholder-val="{{ false }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"></rect><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"></path></svg>
+            </sc-if>
+            <sc-if value="{{ bGlobe }}" hint-placeholder-val="{{ false }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ t.pillInk }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18"></path></svg>
+            </sc-if>
+            <sc-if value="{{ hasBadgeText }}" hint-placeholder-val="{{ true }}">
+              <span style="{{ t.pillText }}">{{ badgeText }}</span>
+            </sc-if>
+            <sc-if value="{{ hasBadgeSub }}" hint-placeholder-val="{{ true }}">
+              <span style="{{ t.pillSub }}">{{ badgeSub }}</span>
+            </sc-if>
+          </div>
+        </sc-if>
       </div>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
@@ -150,19 +272,25 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
         </div>
         <div style="{{ t.meta }}">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconA }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+            <sc-if value="{{ metaIcons }}" hint-placeholder-val="{{ true }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconA }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+            </sc-if>
             <span>{{ time }}</span>
           </div>
           <div style="{{ t.sep }}"></div>
           <div style="display: flex; align-items: center; gap: 10px;">
-            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconB }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+            <sc-if value="{{ metaIcons }}" hint-placeholder-val="{{ true }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ t.iconB }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+            </sc-if>
             <span>{{ place }}</span>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 22px; margin-top: 4px;">
           <div style="{{ t.cta }}">
             <span>{{ cta }}</span>
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ t.ctaInk }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            <sc-if value="{{ ctaArrow }}" hint-placeholder-val="{{ true }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ t.ctaInk }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </sc-if>
           </div>
           <sc-if value="{{ qrOn }}" hint-placeholder-val="{{ true }}">
             <div style="display: flex; align-items: center; gap: 12px;">
@@ -185,7 +313,19 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
     <div style="position: absolute; left: 700px; top: 48px; width: 460px; height: 532px;">
       <sc-for list="{{ slots }}" as="s" hint-placeholder-count="1">
         <div style="{{ s.wrapStyle }}">
+          <sc-if value="{{ s.showHud }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ s.hudStyle }}">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="{{ s.hud }}" height="{{ s.hud }}" viewBox="0 0 200 200" style="display: block;" fill="none">
+                <path d="M6 46 V6 H46 M154 6 H194 V46 M194 154 V194 H154 M46 194 H6 V154" stroke="{{ a1 }}" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M82 6 H118 M82 194 H118" stroke="{{ a2 }}" stroke-opacity="0.75" stroke-width="2"></path>
+                <path d="M6 82 V118 M194 82 V118" stroke="{{ a1 }}" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="3 4"></path>
+                <circle cx="46" cy="6" r="2.5" fill="{{ a2 }}"></circle>
+                <circle cx="154" cy="194" r="2.5" fill="{{ a2 }}"></circle>
+              </svg>
+            </div>
+          </sc-if>
           <div style="{{ s.glowStyle }}"></div>
+          <sc-if value="{{ s.showRings }}" hint-placeholder-val="{{ true }}">
           <div style="{{ s.ringStyle }}">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="{{ s.ring }}" height="{{ s.ring }}" viewBox="0 0 200 200" style="display: block;">
             <circle cx="100" cy="100" r="97" fill="none" stroke="{{ a1 }}" stroke-opacity="0.35" stroke-width="0.8" stroke-dasharray="1.5 4"></circle>
@@ -197,6 +337,7 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
             <circle cx="31.4" cy="168.6" r="2" fill="{{ a1 }}"></circle>
           </svg>
           </div>
+          </sc-if>
           <div style="{{ s.photoStyle }}">
             <sc-if value="{{ s.noPhoto }}" hint-placeholder-val="{{ true }}">
               <div style="position: absolute; left: 22%; top: 20%; width: 56%; height: 70%;">
@@ -262,6 +403,93 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
       </div>
     </section>
 
+    <!-- Frame + Icons -->
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start;">
+      <section class="ctl-card" style="display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <h2 class="ctl-h">Khung ảnh diễn giả</h2>
+          <p class="ctl-sub">Áp dụng cho tất cả diễn giả trên banner.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">HÌNH DẠNG</h3>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;">
+            <sc-for list="{{ shapeTiles }}" as="sh" hint-placeholder-count="4">
+              <button type="button" class="{{ sh.cls }}" aria-pressed="{{ sh.pressed }}" onClick="{{ sh.pick }}" style="align-items: center; text-align: center;">
+                <span style="{{ sh.preview }}"></span>
+                <span>{{ sh.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">VIỀN KHUNG</h3>
+          <div class="seg" role="group" aria-label="Kiểu viền khung ảnh">
+            <sc-for list="{{ borderOpts }}" as="bo" hint-placeholder-count="4">
+              <button type="button" class="{{ bo.cls }}" aria-pressed="{{ bo.pressed }}" onClick="{{ bo.pick }}">{{ bo.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">HIỆU ỨNG QUANH ẢNH</h3>
+          <div class="seg" role="group" aria-label="Hiệu ứng quanh ảnh">
+            <sc-for list="{{ decorOpts }}" as="dd" hint-placeholder-count="3">
+              <button type="button" class="{{ dd.cls }}" aria-pressed="{{ dd.pressed }}" onClick="{{ dd.pick }}">{{ dd.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section class="ctl-card" style="display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <h2 class="ctl-h">Biểu tượng trên banner</h2>
+          <p class="ctl-sub">Bật/tắt, đổi icon và sửa chữ của các chi tiết trang trí.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <label class="chk">
+            <input type="checkbox" checked="{{ badgeOn }}" onChange="{{ toggleBadge }}">
+            Nhãn góc trên (cạnh logo)
+          </label>
+          <sc-if value="{{ badgeOn }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="seg" role="group" aria-label="Icon của nhãn">
+                <sc-for list="{{ badgeIconOpts }}" as="bi" hint-placeholder-count="5">
+                  <button type="button" class="{{ bi.cls }}" aria-pressed="{{ bi.pressed }}" onClick="{{ bi.pick }}">{{ bi.label }}</button>
+                </sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+                <div class="ctl-field">
+                  <label for="badge-text">Chữ chính (để trống = ẩn)</label>
+                  <input type="text" id="badge-text" value="{{ badgeText }}" onChange="{{ onBadgeText }}">
+                </div>
+                <div class="ctl-field">
+                  <label for="badge-sub">Chữ phụ (để trống = ẩn)</label>
+                  <input type="text" id="badge-sub" value="{{ badgeSub }}" onChange="{{ onBadgeSub }}">
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 class="ctl-h3">BIỂU TƯỢNG CHÌM PHÍA SAU</h3>
+          <div class="seg" role="group" aria-label="Biểu tượng chìm">
+            <sc-for list="{{ wmOpts }}" as="w" hint-placeholder-count="5">
+              <button type="button" class="{{ w.cls }}" aria-pressed="{{ w.pressed }}" onClick="{{ w.pick }}">{{ w.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px 24px; flex-wrap: wrap;">
+          <label class="chk">
+            <input type="checkbox" checked="{{ metaIcons }}" onChange="{{ toggleMetaIcons }}">
+            Icon lịch &amp; địa điểm
+          </label>
+          <label class="chk">
+            <input type="checkbox" checked="{{ ctaArrow }}" onChange="{{ toggleCtaArrow }}">
+            Mũi tên trên nút CTA
+          </label>
+        </div>
+      </section>
+    </div>
+
     <!-- Appearance + QR -->
     <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; align-items: start;">
       <section class="ctl-card" style="grid-column: span 3; display: flex; flex-direction: column; gap: 22px;">
@@ -279,6 +507,13 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
                 <span>{{ p.label }}</span>
               </button>
             </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px 24px; flex-wrap: wrap;">
+            <label class="chk">
+              <input type="checkbox" checked="{{ gridOn }}" onChange="{{ toggleGrid }}">
+              Lưới nền
+            </label>
+            <span style="font-size: 12.5px; color: #94A3B8;">{{ styleNote }}</span>
           </div>
         </div>
 
@@ -428,13 +663,72 @@ a{color:#67E8F9}a:hover{color:#A5F3FC}
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2150}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2740}}'>
+// decor: matrix | circuit | minimal | aurora | glass | waves | network | hex | none
+// grid: default state of the "Lưới nền" toggle when the style is picked
+// clear: transparent background (exported PNG keeps alpha); light: dark text
 const STYLES = {
-  matrix:  { label: 'Ma trận Cyber', decor: 'matrix',  light: false, bg1: '#060B19', bg2: '#0F172A' },
-  circuit: { label: 'Mạch Neon',     decor: 'circuit', light: false, bg1: '#030712', bg2: '#111827' },
-  minimal: { label: 'Tối giản',      decor: 'minimal', light: false, bg1: '#0B1120', bg2: '#1E293B' },
-  light:   { label: 'Sáng hiện đại', decor: 'circuit', light: true,  bg1: '#F8FAFC', bg2: '#E0F2FE' }
+  matrix:     { label: 'Ma trận Cyber',  decor: 'matrix',  grid: true,  light: false, bg1: '#060B19', bg2: '#0F172A' },
+  circuit:    { label: 'Mạch Neon',      decor: 'circuit', grid: true,  light: false, bg1: '#030712', bg2: '#111827' },
+  minimal:    { label: 'Tối giản',       decor: 'minimal', grid: true,  light: false, bg1: '#0B1120', bg2: '#1E293B' },
+  light:      { label: 'Sáng hiện đại',  decor: 'circuit', grid: true,  light: true,  bg1: '#F8FAFC', bg2: '#E0F2FE' },
+  aurora:     { label: 'Cực quang',      decor: 'aurora',  grid: false, light: false, bg1: '#070B1F', bg2: '#120B2E' },
+  glass:      { label: 'Kính mờ',        decor: 'glass',   grid: false, light: false, bg1: '#0B1230', bg2: '#1A1240' },
+  waves:      { label: 'Sóng ánh sáng',  decor: 'waves',   grid: false, light: false, bg1: '#04111F', bg2: '#0B2537' },
+  network:    { label: 'Mạng hạt',       decor: 'network', grid: false, light: false, bg1: '#050A18', bg2: '#0E1A33' },
+  hex:        { label: 'Tổ ong',         decor: 'hex',     grid: false, light: false, bg1: '#071018', bg2: '#0F1D2B' },
+  clearDark:  { label: 'Trong suốt – chữ sáng', decor: 'none', grid: false, light: false, clear: true, bg1: '#0F172A', bg2: '#0F172A' },
+  clearLight: { label: 'Trong suốt – chữ tối',  decor: 'none', grid: false, light: true,  clear: true, bg1: '#FFFFFF', bg2: '#FFFFFF' }
 };
+
+function makeNetwork() {
+  let seed = 11;
+  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  const pts = [];
+  // denser on the right / top, sparse behind the title
+  for (let i = 0; i < 54; i++) {
+    let x, y;
+    if (i < 34) { x = 640 + rnd() * 580; y = -10 + rnd() * 650; }
+    else if (i < 46) { x = rnd() * 640; y = rnd() < 0.5 ? -10 + rnd() * 70 : 560 + rnd() * 80; }
+    else { x = rnd() * 60; y = rnd() * 628; }
+    pts.push([Math.round(x), Math.round(y)]);
+  }
+  let lines = '', dots = '', big = '';
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < pts.length; j++) {
+      const dx = pts[i][0] - pts[j][0], dy = pts[i][1] - pts[j][1];
+      if (dx * dx + dy * dy < 130 * 130) lines += 'M' + pts[i][0] + ' ' + pts[i][1] + 'L' + pts[j][0] + ' ' + pts[j][1];
+    }
+    if (i % 7 === 0) big += 'M' + pts[i][0] + ' ' + pts[i][1] + 'h0.01';
+    else dots += 'M' + pts[i][0] + ' ' + pts[i][1] + 'h0.01';
+  }
+  return { lines: lines, dots: dots, big: big };
+}
+
+function makeHex() {
+  const r = 30, w = Math.sqrt(3) * r;
+  const bands = ['', '', ''];
+  let hi = '';
+  let k = 0;
+  for (let row = -1; row < 13; row++) {
+    for (let col = 0; col < 26; col++) {
+      const cx = col * w + (row % 2 ? w / 2 : 0);
+      const cy = row * r * 1.5;
+      if (cx < 560) continue;
+      let d = '';
+      for (let v = 0; v < 6; v++) {
+        const a = Math.PI / 180 * (60 * v - 30);
+        d += (v ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(1) + ' ' + (cy + r * Math.sin(a)).toFixed(1);
+      }
+      d += 'Z';
+      const band = cx > 960 ? 0 : cx > 760 ? 1 : 2;
+      bands[band] += d;
+      k++;
+      if (k % 23 === 5 && cx > 700) hi += d;
+    }
+  }
+  return { h0: bands[0], h1: bands[1], h2: bands[2], hi: hi };
+}
 const PALETTES = [
   { label: 'Cyan & Xanh ngọc',  a1: '#06B6D4', a2: '#10B981' },
   { label: 'Xanh dương & Tím',  a1: '#3B82F6', a2: '#8B5CF6' },
@@ -490,11 +784,16 @@ class Component extends DCLogic {
       bgImg: '', overlay: 70,
       qrOn: true, qrMode: 'link', qrLink: '', qrGen: '', qrImg: '', qrErr: '',
       qrCaption: 'Quét mã để đăng ký',
+      frameShape: 'circle', frameBorder: 'glow', frameDecor: 'rings',
+      badgeOn: true, badgeIcon: 'lock', badgeText: 'https://', badgeSub: 'secure',
+      wmIcon: 'lock', metaIcons: true, ctaArrow: true, gridOn: true,
       scale: 2, busy: false, err: '', exportUrl: ''
     };
     this.bannerEl = null;
     this.bannerRef = (el) => { this.bannerEl = el; };
     this.rain = this.makeRain();
+    this.net = makeNetwork();
+    this.hex = makeHex();
   }
 
   makeRain() {
@@ -562,14 +861,16 @@ class Component extends DCLogic {
         await document.fonts.ready;
       }
       const s = this.state.scale;
-      const bg = this.state.bg1;
+      const S = STYLES[this.state.style] || STYLES.matrix;
+      const clear = !!S.clear && !this.state.bgImg;
+      const bg = clear ? 'transparent' : this.state.bg1;
       // Capture an isolated copy: the artboard can be zoomed (CSS transform) or scrolled,
       // which made html2canvas squeeze and shift the old export. In the clone we drop every
       // other node, reset transforms and place the banner alone at 0,0 in a 1200x628 window.
       const canvas = await window.html2canvas(this.bannerEl, {
         scale: s, width: 1200, height: 628, x: 0, y: 0,
         scrollX: 0, scrollY: 0, windowWidth: 1200, windowHeight: 628,
-        backgroundColor: bg, useCORS: true, logging: false,
+        backgroundColor: clear ? null : bg, useCORS: true, logging: false,
         onclone: (doc, el) => {
           doc.documentElement.style.cssText = 'margin:0;padding:0;transform:none;zoom:1;overflow:hidden;background:' + bg;
           const body = doc.body;
@@ -581,6 +882,7 @@ class Component extends DCLogic {
           el.style.margin = '0px';
           el.style.transform = 'none';
           el.style.boxShadow = 'none';
+          if (clear) { el.style.backgroundImage = 'none'; el.style.backgroundColor = 'transparent'; }
           // html2canvas 1.4.1 draws backdrop-filter as dark blocks behind text
           el.querySelectorAll('*').forEach((n) => { n.style.backdropFilter = 'none'; n.style.webkitBackdropFilter = 'none'; });
           body.appendChild(el);
@@ -595,6 +897,36 @@ class Component extends DCLogic {
     } catch (err) {
       this.setState({ busy: false, err: 'Xuất ảnh thất bại: ' + (err && err.message ? err.message : err) });
     }
+  }
+
+  // corner radius for the chosen frame shape; grow = extra px for an outer ring that sits `grow` px outside
+  frameRadius(size, grow) {
+    const sh = this.state.frameShape;
+    if (sh === 'circle') return '50%';
+    if (sh === 'rounded') return (Math.round(size * 0.2) + grow) + 'px';
+    if (sh === 'leaf') {
+      const R = Math.round(size * 0.5) + grow, r = Math.round(size * 0.1) + grow;
+      return R + 'px ' + r + 'px';
+    }
+    return (6 + grow) + 'px';
+  }
+
+  // layer under the photo: glow (default), outer second ring (double), or nothing
+  glowStyle(size, L) {
+    const st = this.state;
+    const base = { position: 'absolute', left: '0px', top: '0px', width: size + 'px', height: size + 'px', borderRadius: this.frameRadius(size, 0) };
+    if (st.frameBorder === 'glow') {
+      base.boxShadow = '0 0 0 6px ' + rgba(st.a1, 0.14) + ', 0 0 30px ' + rgba(st.a1, L ? 0.35 : 0.55);
+    } else if (st.frameBorder === 'double') {
+      const g = 9;
+      base.left = -g + 'px'; base.top = -g + 'px';
+      base.width = (size + g * 2) + 'px'; base.height = (size + g * 2) + 'px';
+      base.boxSizing = 'border-box';
+      base.border = '2px solid ' + st.a2;
+      base.borderRadius = this.frameRadius(size, g);
+      base.boxShadow = '0 0 18px ' + rgba(st.a2, L ? 0.25 : 0.4);
+    }
+    return base;
   }
 
   layout(n) {
@@ -637,13 +969,37 @@ class Component extends DCLogic {
       root.backgroundSize = 'cover, cover';
       root.backgroundPosition = 'center, center';
       root.backgroundRepeat = 'no-repeat, no-repeat';
+    } else if (S.clear) {
+      // checkerboard is preview-only; exportPng strips it so the PNG keeps its alpha
+      const sq = L ? '#E5E7EB' : '#1F2937';
+      root.backgroundColor = L ? '#FFFFFF' : '#111827';
+      root.backgroundImage = 'linear-gradient(45deg, ' + sq + ' 25%, transparent 25%), linear-gradient(-45deg, ' + sq + ' 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ' + sq + ' 75%), linear-gradient(-45deg, transparent 75%, ' + sq + ' 75%)';
+      root.backgroundSize = '24px 24px';
+      root.backgroundPosition = '0 0, 0 12px, 12px -12px, -12px 0';
+      root.boxShadow = 'none';
     } else {
       root.backgroundImage = 'linear-gradient(125deg, ' + st.bg1 + ' 0%, ' + mix(st.bg1, st.bg2, 0.45) + ' 45%, ' + st.bg2 + ' 100%)';
     }
+    const blob = (left, top, size, color, a) => ({
+      position: 'absolute', left: left + 'px', top: top + 'px', width: size + 'px', height: size + 'px', borderRadius: '50%',
+      backgroundImage: 'radial-gradient(circle, ' + rgba(color, a) + ' 0%, ' + rgba(color, a * 0.45) + ' 35%, ' + rgba(color, 0) + ' 68%)'
+    });
+    const bk = S.decor === 'glass' ? 1.15 : 1;
+    const glassFill = 'rgba(255,255,255,0.055)', glassLine = 'rgba(255,255,255,0.14)';
 
     return {
       S: S, L: L,
       root: root,
+      blob1: blob(560, -260, 820, a1, 0.42 * bk),
+      blob2: blob(-300, 220, 760, a2, 0.34 * bk),
+      blob3: blob(240, -340, 640, mix(a1, a2, 0.5), 0.22 * bk),
+      glassPanel: { position: 'absolute', left: '28px', top: '26px', width: '676px', height: '576px', boxSizing: 'border-box', borderRadius: '28px',
+        // no box-shadow: html2canvas paints it as a solid block visible through a translucent fill
+        background: glassFill, border: '1px solid ' + glassLine, borderTop: '1px solid rgba(255,255,255,0.24)' },
+      gc1: { position: 'absolute', left: '1030px', top: '-70px', width: '230px', height: '230px', boxSizing: 'border-box', borderRadius: '50%',
+        background: glassFill, border: '1px solid ' + glassLine },
+      gc2: { position: 'absolute', left: '610px', top: '480px', width: '150px', height: '150px', boxSizing: 'border-box', borderRadius: '50%',
+        background: glassFill, border: '1px solid ' + glassLine },
       grid: {
         position: 'absolute', left: 0, top: 0, right: 0, bottom: 0,
         backgroundImage: 'linear-gradient(' + rgba(a1, gridA) + ' 1px, transparent 1px), linear-gradient(90deg, ' + rgba(a1, gridA) + ' 1px, transparent 1px)',
@@ -690,6 +1046,7 @@ class Component extends DCLogic {
     const lay = this.layout(n);
     const t = this.theme();
     const L = t.L;
+    const clear = !!t.S.clear && !st.bgImg;
 
     const len = (st.titleMain + ' ' + st.titleHi).length;
     const qrShrink = st.qrOn ? 0 : 0;
@@ -709,9 +1066,12 @@ class Component extends DCLogic {
       const sp = st.speakers[i];
       const ring = Math.round(Ly.size * 1.42);
       const off = Math.round((ring - Ly.size) / 2);
+      const hud = Math.round(Ly.size * 1.24);
+      const hudOff = Math.round((hud - Ly.size) / 2);
       const photo = {
         position: 'absolute', left: '0px', top: '0px', width: Ly.size + 'px', height: Ly.size + 'px',
-        boxSizing: 'border-box', borderRadius: '50%', border: '3px solid ' + st.a1, overflow: 'hidden',
+        boxSizing: 'border-box', borderRadius: this.frameRadius(Ly.size, 0), overflow: 'hidden',
+        border: st.frameBorder === 'none' ? '0px solid transparent' : (st.frameBorder === 'thin' ? '2px solid ' : '3px solid ') + st.a1,
         backgroundColor: L ? '#E2E8F0' : '#0E1A33'
       };
       if (sp.photo) {
@@ -728,8 +1088,11 @@ class Component extends DCLogic {
         ring: ring,
         ringStyle: { position: 'absolute', left: -off + 'px', top: -off + 'px', width: ring + 'px', height: ring + 'px' },
         // glow lives on its own layer: html2canvas paints a spread box-shadow over a photo that carries it
-        glowStyle: { position: 'absolute', left: '0px', top: '0px', width: Ly.size + 'px', height: Ly.size + 'px', borderRadius: '50%',
-          boxShadow: '0 0 0 6px ' + rgba(st.a1, 0.14) + ', 0 0 30px ' + rgba(st.a1, L ? 0.35 : 0.55) },
+        glowStyle: this.glowStyle(Ly.size, L),
+        showRings: st.frameDecor === 'rings',
+        showHud: st.frameDecor === 'hud',
+        hud: hud,
+        hudStyle: { position: 'absolute', left: -hudOff + 'px', top: -hudOff + 'px', width: hud + 'px', height: hud + 'px' },
         photoStyle: photo,
         cardStyle: {
           position: 'absolute', left: Ly.cx + 'px', top: Ly.cy + 'px', width: Ly.cw + 'px', boxSizing: 'border-box',
@@ -747,7 +1110,7 @@ class Component extends DCLogic {
     const editors = [];
     for (let i = 0; i < n; i++) {
       const sp = st.speakers[i];
-      const th = { width: '64px', height: '64px', flexShrink: 0, borderRadius: '50%', boxSizing: 'border-box', border: '2px solid #06B6D4', backgroundColor: '#0E1A33' };
+      const th = { width: '64px', height: '64px', flexShrink: 0, borderRadius: this.frameRadius(64, 0), boxSizing: 'border-box', border: '2px solid #06B6D4', backgroundColor: '#0E1A33' };
       if (sp.photo) { th.backgroundImage = 'url("' + sp.photo + '")'; th.backgroundSize = 'cover'; th.backgroundPosition = 'center 30%'; }
       editors.push({
         num: i + 1, name: sp.name, role: sp.role, hasPhoto: !!sp.photo,
@@ -760,6 +1123,13 @@ class Component extends DCLogic {
     }
 
     const seg = (on) => ({ cls: on ? 'on' : '', pressed: on ? 'true' : 'false' });
+    const opts = (key, list) => list.map((o) => Object.assign({ label: o[1], pick: () => { const p = {}; p[key] = o[0]; this.setState(p); } }, seg(st[key] === o[0])));
+    const shapeTiles = [['circle', 'Tròn'], ['rounded', 'Bo góc'], ['leaf', 'Hình lá'], ['square', 'Vuông']].map((o) => {
+      const on = st.frameShape === o[0];
+      const prev = { display: 'block', width: '44px', height: '44px', boxSizing: 'border-box', border: '2.5px solid #06B6D4', background: 'rgba(6,182,212,0.12)' };
+      prev.borderRadius = o[0] === 'circle' ? '50%' : o[0] === 'rounded' ? '10px' : o[0] === 'leaf' ? '22px 5px' : '4px';
+      return { label: o[1], cls: on ? 'tile on' : 'tile', pressed: on ? 'true' : 'false', preview: prev, pick: () => this.setState({ frameShape: o[0] }) };
+    });
     const counts = [1, 2, 3].map((k) => Object.assign({ label: k + ' Diễn giả', pick: () => this.setState({ count: k }) }, seg(k === n)));
     const scales = [{ k: 1, label: '1x · 1200×628' }, { k: 2, label: '2x · 2400×1256' }]
       .map((o) => Object.assign({ label: o.label, pick: () => this.setState({ scale: o.k }) }, seg(o.k === st.scale)));
@@ -767,16 +1137,34 @@ class Component extends DCLogic {
     const styleTiles = Object.keys(STYLES).map((key) => {
       const S = STYLES[key];
       const on = key === st.style;
+      const base = 'linear-gradient(125deg, ' + S.bg1 + ', ' + S.bg2 + ')';
+      const pv = { display: 'block', height: '52px', borderRadius: '8px', backgroundColor: S.bg1, border: '1px solid ' + (S.light ? '#CBD5E1' : '#1E293B') };
+      const g = rgba(st.a1, S.decor === 'minimal' ? 0.08 : 0.22);
+      if (S.clear) {
+        const sq = S.light ? '#E5E7EB' : '#374151';
+        pv.backgroundColor = S.light ? '#FFFFFF' : '#111827';
+        pv.backgroundImage = 'linear-gradient(45deg, ' + sq + ' 25%, transparent 25%), linear-gradient(-45deg, ' + sq + ' 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ' + sq + ' 75%), linear-gradient(-45deg, transparent 75%, ' + sq + ' 75%)';
+        pv.backgroundSize = '12px 12px';
+        pv.backgroundPosition = '0 0, 0 6px, 6px -6px, -6px 0';
+      } else if (S.decor === 'aurora' || S.decor === 'glass') {
+        pv.backgroundImage = 'radial-gradient(circle at 80% 20%, ' + rgba(st.a1, 0.7) + ', transparent 45%), radial-gradient(circle at 15% 90%, ' + rgba(st.a2, 0.6) + ', transparent 50%), ' + base;
+        if (S.decor === 'glass') pv.boxShadow = 'inset 0 0 0 8px ' + S.bg1 + ', inset 0 0 0 9px rgba(255,255,255,0.25)';
+      } else if (S.decor === 'waves') {
+        pv.backgroundImage = 'repeating-radial-gradient(circle at 50% 160%, transparent 0 9px, ' + rgba(st.a1, 0.45) + ' 9px 10px), ' + base;
+      } else if (S.decor === 'network') {
+        pv.backgroundImage = 'radial-gradient(' + rgba(st.a2, 0.8) + ' 1.5px, transparent 2px), ' + base;
+        pv.backgroundSize = '13px 11px, cover';
+      } else if (S.decor === 'hex') {
+        pv.backgroundImage = 'radial-gradient(circle, transparent 4px, ' + rgba(st.a1, 0.45) + ' 4px 5px, transparent 5px), ' + base;
+        pv.backgroundSize = '12px 12px, cover';
+      } else {
+        pv.backgroundImage = 'linear-gradient(' + g + ' 1px, transparent 1px), linear-gradient(90deg, ' + g + ' 1px, transparent 1px), ' + base;
+        pv.backgroundSize = '12px 12px, 12px 12px, cover';
+      }
       return {
         label: S.label, cls: on ? 'tile on' : 'tile', pressed: on ? 'true' : 'false',
-        preview: {
-          display: 'block', height: '52px', borderRadius: '8px',
-          backgroundColor: S.bg1,
-          backgroundImage: 'linear-gradient(' + rgba(st.a1, S.decor === 'minimal' ? 0.08 : 0.22) + ' 1px, transparent 1px), linear-gradient(90deg, ' + rgba(st.a1, S.decor === 'minimal' ? 0.08 : 0.22) + ' 1px, transparent 1px), linear-gradient(125deg, ' + S.bg1 + ', ' + S.bg2 + ')',
-          backgroundSize: '12px 12px, 12px 12px, cover',
-          border: '1px solid ' + (S.light ? '#CBD5E1' : '#1E293B')
-        },
-        pick: () => this.setState({ style: key, bg1: S.bg1, bg2: S.bg2 })
+        preview: pv,
+        pick: () => this.setState({ style: key, bg1: S.bg1, bg2: S.bg2, gridOn: S.grid })
       };
     });
 
@@ -824,7 +1212,48 @@ class Component extends DCLogic {
       t: t, a1: st.a1, a2: st.a2,
       decorMatrix: t.S.decor === 'matrix',
       decorCircuit: t.S.decor === 'circuit',
-      showLock: t.S.decor !== 'minimal',
+      showGrid: st.gridOn,
+      gridOn: st.gridOn,
+      toggleGrid: (e) => this.setState({ gridOn: e.target.checked }),
+      styleNote: clear
+        ? 'Nền trong suốt: ô caro chỉ để xem trước, ảnh PNG xuất ra giữ nền trong suốt.'
+        : 'Bật/tắt lưới cho bất kỳ phong cách nào.',
+      showGlow: !clear && t.S.decor !== 'aurora' && t.S.decor !== 'glass',
+      decorBlobs: !clear && (t.S.decor === 'aurora' || t.S.decor === 'glass'),
+      decorGlass: t.S.decor === 'glass',
+      decorWaves: t.S.decor === 'waves',
+      waveFillA: L ? 0.1 : 0.12, waveFillB: L ? 0.08 : 0.1, waveLineA: L ? 0.45 : 0.4, waveLineB: L ? 0.4 : 0.35,
+      decorNetwork: t.S.decor === 'network',
+      netLines: this.net.lines, netDots: this.net.dots, netDotsBig: this.net.big,
+      netLineOp: L ? 0.25 : 0.22, netDotOp: L ? 0.6 : 0.7,
+      decorHex: t.S.decor === 'hex',
+      hex0: this.hex.h0, hex1: this.hex.h1, hex2: this.hex.h2, hexHi: this.hex.hi,
+      hexOp0: L ? 0.3 : 0.26, hexOp1: L ? 0.18 : 0.15, hexOp2: L ? 0.09 : 0.07,
+      wmLock: st.wmIcon === 'lock',
+      wmShield: st.wmIcon === 'shield',
+      wmGlobe: st.wmIcon === 'globe',
+      wmChip: st.wmIcon === 'chip',
+      badgeOn: st.badgeOn,
+      bLock: st.badgeIcon === 'lock',
+      bShield: st.badgeIcon === 'shield',
+      bChip: st.badgeIcon === 'chip',
+      bGlobe: st.badgeIcon === 'globe',
+      badgeText: st.badgeText,
+      badgeSub: st.badgeSub,
+      hasBadgeText: !!st.badgeText.trim(),
+      hasBadgeSub: !!st.badgeSub.trim(),
+      metaIcons: st.metaIcons,
+      ctaArrow: st.ctaArrow,
+      toggleBadge: (e) => this.setState({ badgeOn: e.target.checked }),
+      onBadgeText: (e) => this.setState({ badgeText: e.target.value }),
+      onBadgeSub: (e) => this.setState({ badgeSub: e.target.value }),
+      toggleMetaIcons: (e) => this.setState({ metaIcons: e.target.checked }),
+      toggleCtaArrow: (e) => this.setState({ ctaArrow: e.target.checked }),
+      shapeTiles: shapeTiles,
+      borderOpts: opts('frameBorder', [['glow', 'Phát sáng'], ['thin', 'Viền mảnh'], ['double', 'Viền kép'], ['none', 'Không viền']]),
+      decorOpts: opts('frameDecor', [['rings', 'Vòng công nghệ'], ['hud', 'Góc HUD'], ['none', 'Không']]),
+      badgeIconOpts: opts('badgeIcon', [['lock', 'Ổ khóa'], ['shield', 'Khiên'], ['chip', 'Chip'], ['globe', 'Quả cầu'], ['none', 'Không icon']]),
+      wmOpts: opts('wmIcon', [['lock', 'Ổ khóa'], ['shield', 'Khiên'], ['globe', 'Quả cầu'], ['chip', 'Chip'], ['none', 'Không']]),
       lockOp: L ? 0.16 : 0.2,
       lockHaloOp: L ? 0.05 : 0.07,
       circuitOp: L ? 0.4 : 0.35,
